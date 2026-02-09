@@ -1,0 +1,679 @@
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:41:22.591Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:41:22.592Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:41:22.592Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:41:22.592Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.592Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.593Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.593Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.593Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:41:22.593Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.593Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:22.594Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:41:22.595Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:41:22.596Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:22.597Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:41:22.598Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:41:22.598Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:41:22.598Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:41:48.862Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:41:48.863Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:41:48.863Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:41:48.863Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.863Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:41:48.864Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:41:48.865Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:41:48.866Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:48.867Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:41:48.868Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:41:48.868Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:41:48.868Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:41:53.820Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:41:53.821Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:41:53.821Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:41:53.822Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.822Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.822Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.822Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.822Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:41:53.823Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.823Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.823Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:41:53.823Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:41:53.823Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:41:53.824Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:41:53.825Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:41:53.826Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:41:53.827Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:41:56.578Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:41:56.579Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:41:56.579Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:41:56.579Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.579Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.580Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:41:56.581Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:41:56.582Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:41:56.583Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:41:56.584Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:41:56.584Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:41:56.584Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:41:56.584Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:43:35.497Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:43:35.497Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:43:35.498Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:43:35.498Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.498Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:43:35.499Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:43:35.500Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:43:35.501Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:43:35.502Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:43:35.503Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:43:35.503Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:43:35.503Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T17:43:45.310Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T17:43:45.311Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T17:43:45.311Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T17:43:45.311Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.311Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.312Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.312Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.312Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T17:43:45.312Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.312Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T17:43:45.313Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T17:43:45.314Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T17:43:45.315Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T17:43:45.316Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:00:13.081Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:00:13.081Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:00:13.082Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:00:13.082Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.082Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.082Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.083Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.083Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:00:13.083Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.083Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:00:13.084Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:00:13.085Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:00:13.086Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:00:13.087Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:00:13.088Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:00:13.088Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:00:13.088Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:00:13.088Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:00:13.088Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:00:13.089Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:00:13.089Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:00:13.089Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:00:52.150Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:00:52.151Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:00:52.151Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:00:52.151Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.151Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.152Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.152Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.152Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:00:52.152Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:00:52.153Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:00:52.154Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:00:52.155Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:00:52.156Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:00:52.157Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:00:52.157Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:00:52.157Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:01:14.833Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:01:14.833Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:01:14.833Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:01:14.834Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.834Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.834Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.834Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.834Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:01:14.835Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:01:14.836Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:01:14.837Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:01:14.838Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:01:14.839Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:01:43.350Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:01:43.350Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:01:43.351Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:01:43.351Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.351Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.351Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.352Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.352Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:01:43.352Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.352Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.352Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:01:43.353Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:01:43.354Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:01:43.355Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:01:43.356Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:04:08.758Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:04:08.759Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:04:08.759Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:04:08.759Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.759Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.759Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:04:08.760Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:04:08.761Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:04:08.762Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:04:08.763Z"}
+{"context":"AuthService","level":"info","message":"New user registered: doctor@example.com (DOCTOR)","timestamp":"2026-02-09T18:07:58.194Z"}
+{"context":"ExceptionsHandler","level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan","stack":["Error: \"expiresIn\" should be a number of seconds or string representing a timespan\n    at M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:56:15\n    at Array.forEach (<anonymous>)\n    at validate (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:47:6)\n    at validateOptions (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:62:10)\n    at module.exports [as sign] (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:171:5)\n    at M:\\advanced\\projects\\medi_back\\node_modules\\@nestjs\\jwt\\dist\\jwt.service.js:56:17"],"timestamp":"2026-02-09T18:11:10.946Z"}
+{"context":"ExceptionsHandler","level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan","stack":["Error: \"expiresIn\" should be a number of seconds or string representing a timespan\n    at M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:56:15\n    at Array.forEach (<anonymous>)\n    at validate (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:47:6)\n    at validateOptions (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:62:10)\n    at module.exports [as sign] (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:171:5)\n    at M:\\advanced\\projects\\medi_back\\node_modules\\@nestjs\\jwt\\dist\\jwt.service.js:56:17"],"timestamp":"2026-02-09T18:11:17.084Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:14:07.684Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:14:07.685Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:14:07.686Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:14:07.686Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.686Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.686Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.687Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.687Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:14:07.687Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.687Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:14:07.688Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:14:07.689Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:14:07.690Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:14:07.691Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:14:07.692Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:14:07.692Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:14:07.692Z"}
+{"context":"ExceptionsHandler","level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan","stack":["Error: \"expiresIn\" should be a number of seconds or string representing a timespan\n    at M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:56:15\n    at Array.forEach (<anonymous>)\n    at validate (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:47:6)\n    at validateOptions (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:62:10)\n    at module.exports [as sign] (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:171:5)\n    at M:\\advanced\\projects\\medi_back\\node_modules\\@nestjs\\jwt\\dist\\jwt.service.js:56:17"],"timestamp":"2026-02-09T18:14:11.284Z"}
+{"context":"ExceptionsHandler","level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan","stack":["Error: \"expiresIn\" should be a number of seconds or string representing a timespan\n    at M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:56:15\n    at Array.forEach (<anonymous>)\n    at validate (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:47:6)\n    at validateOptions (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:62:10)\n    at module.exports [as sign] (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:171:5)\n    at M:\\advanced\\projects\\medi_back\\node_modules\\@nestjs\\jwt\\dist\\jwt.service.js:56:17"],"timestamp":"2026-02-09T18:14:23.766Z"}
+{"context":"ExceptionsHandler","level":"error","message":"\"expiresIn\" should be a number of seconds or string representing a timespan","stack":["Error: \"expiresIn\" should be a number of seconds or string representing a timespan\n    at M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:56:15\n    at Array.forEach (<anonymous>)\n    at validate (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:47:6)\n    at validateOptions (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:62:10)\n    at module.exports [as sign] (M:\\advanced\\projects\\medi_back\\node_modules\\jsonwebtoken\\sign.js:171:5)\n    at M:\\advanced\\projects\\medi_back\\node_modules\\@nestjs\\jwt\\dist\\jwt.service.js:56:17"],"timestamp":"2026-02-09T18:15:31.317Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:23:41.044Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:23:41.044Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:23:41.045Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:23:41.045Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.045Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.045Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:23:41.046Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:23:41.047Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:23:41.048Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:23:41.049Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:23:41.050Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:23:45.337Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:23:45.338Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:23:45.338Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:23:45.338Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.339Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.339Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.339Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.339Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:23:45.339Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:45.340Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:23:45.341Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:23:45.342Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:45.343Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:23:45.344Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:23:45.344Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:23:45.344Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:23:50.293Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:23:50.294Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:23:50.294Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:23:50.294Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.295Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:23:50.296Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:23:50.297Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:50.298Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:23:50.299Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:50.299Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:23:50.299Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:23:50.299Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:23:50.299Z"}
+{"context":"NestFactory","level":"info","message":"Starting Nest application...","timestamp":"2026-02-09T18:23:52.535Z"}
+{"context":"InstanceLoader","level":"info","message":"AppModule dependencies initialized","timestamp":"2026-02-09T18:23:52.535Z"}
+{"context":"InstanceLoader","level":"info","message":"PrismaModule dependencies initialized","timestamp":"2026-02-09T18:23:52.536Z"}
+{"context":"InstanceLoader","level":"info","message":"PassportModule dependencies initialized","timestamp":"2026-02-09T18:23:52.536Z"}
+{"context":"InstanceLoader","level":"info","message":"DoctorsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.536Z"}
+{"context":"InstanceLoader","level":"info","message":"AppointmentsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.536Z"}
+{"context":"InstanceLoader","level":"info","message":"PrescriptionsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.536Z"}
+{"context":"InstanceLoader","level":"info","message":"LabResultsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"InsuranceModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"PaymentsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"NotificationsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"ThrottlerModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigHostModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"WinstonModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"AuditModule dependencies initialized","timestamp":"2026-02-09T18:23:52.537Z"}
+{"context":"InstanceLoader","level":"info","message":"DiscoveryModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"ConfigModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"ScheduleModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"S3Service","level":"info","message":"S3 Service initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"RedisModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"EncryptionModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"S3Module dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"JwtModule dependencies initialized","timestamp":"2026-02-09T18:23:52.538Z"}
+{"context":"InstanceLoader","level":"info","message":"UsersModule dependencies initialized","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"InstanceLoader","level":"info","message":"PatientsModule dependencies initialized","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"InstanceLoader","level":"info","message":"AuthModule dependencies initialized","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RoutesResolver","level":"info","message":"AuthController {/api/v1/auth} (version: 1):","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/register, POST} (version: 1) route","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/login, POST} (version: 1) route","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/logout, POST} (version: 1) route","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/refresh, POST} (version: 1) route","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/change-password, POST} (version: 1) route","timestamp":"2026-02-09T18:23:52.539Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/auth/me, GET} (version: 1) route","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RoutesResolver","level":"info","message":"UsersController {/api/v1/users} (version: 1):","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users, GET} (version: 1) route","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/users/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RoutesResolver","level":"info","message":"PatientsController {/api/v1/patients} (version: 1):","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RouterExplorer","level":"info","message":"Mapped {/api/v1/patients/:id, GET} (version: 1) route","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"RedisService","level":"info","message":"✅ Redis connected successfully","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"PrismaService","level":"info","message":"✅ Database connected successfully","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"NestApplication","level":"info","message":"Nest application successfully started","timestamp":"2026-02-09T18:23:52.540Z"}
+{"context":"AuthService","level":"info","message":"User logged in: doctor@example.com","timestamp":"2026-02-09T18:23:56.313Z"}
