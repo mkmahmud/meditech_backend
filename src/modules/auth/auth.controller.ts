@@ -15,14 +15,20 @@ import {
   loginSchema,
   refreshTokenSchema,
   changePasswordSchema,
+  assignRoleSchema,
+  createUserSchema,
   RegisterDto,
   LoginDto,
   RefreshTokenDto,
   ChangePasswordDto,
+  AssignRoleDto,
+  CreateUserDto,
 } from './schemas/auth.schema';
 import { Public } from '@/common/decorators/auth.decorator';
 import { CurrentUser } from '@/common/decorators/current-user.decorator';
+import { Roles } from '@/common/decorators/auth.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { RolesGuard } from './guards/roles.guard';
 import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
 
 @ApiTags('Authentication')
@@ -102,5 +108,38 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'User profile retrieved' })
   async getProfile(@CurrentUser() user: any) {
     return { user };
+  }
+
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'SUPER_ADMIN')
+  @Post('assign-role')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Assign role to user (Admin/Super Admin only)' })
+  @ApiResponse({ status: 200, description: 'Role assigned successfully' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  @UsePipes(new ZodValidationPipe(assignRoleSchema))
+  async assignRole(
+    @CurrentUser('id') adminId: string,
+    @Body() assignRoleDto: AssignRoleDto,
+  ) {
+    return this.authService.assignRole(adminId, assignRoleDto);
+  }
+
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('ADMIN', 'SUPER_ADMIN')
+  @Post('create-user')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Create new user (Admin/Super Admin only)' })
+  @ApiResponse({ status: 201, description: 'User created successfully' })
+  @ApiResponse({ status: 409, description: 'User already exists' })
+  @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+  async createUser(
+    @CurrentUser('id') adminId: string,
+    @Body(new ZodValidationPipe(createUserSchema)) createUserDto: CreateUserDto,
+  ) {
+    return this.authService.createUserByAdmin(adminId, createUserDto);
   }
 }

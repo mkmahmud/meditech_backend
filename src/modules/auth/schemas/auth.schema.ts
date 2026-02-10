@@ -13,7 +13,7 @@ export const registerSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   phoneNumber: z.string().optional(),
-  role: z.enum(['PATIENT', 'DOCTOR', 'NURSE', 'RECEPTIONIST', 'PHARMACIST', 'LAB_TECHNICIAN']),
+  role: z.enum(['PATIENT', 'DOCTOR', 'NURSE', 'RECEPTIONIST', 'PHARMACIST', 'LAB_TECHNICIAN']).optional(),
   dateOfBirth: z.string().optional(),
   gender: z.enum(['MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY']).optional(),
 });
@@ -76,3 +76,28 @@ export const verifyEmailSchema = z.object({
 });
 
 export type VerifyEmailDto = z.infer<typeof verifyEmailSchema>;
+
+// Assign Role Schema (Admin only)
+export const assignRoleSchema = z.object({
+  userId: z.string().min(1, 'User ID is required'),
+  role: z.enum(['ADMIN', 'DOCTOR', 'NURSE', 'PATIENT', 'RECEPTIONIST', 'PHARMACIST', 'LAB_TECHNICIAN'], {
+    errorMap: () => ({ message: 'Invalid role' }),
+  }),
+});
+
+export type AssignRoleDto = z.infer<typeof assignRoleSchema>;
+
+// Create User Schema (Admin only)
+export const createUserSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  firstName: z.string().min(1, 'First name is required'),
+  lastName: z.string().min(1, 'Last name is required'),
+  phoneNumber: z.string().optional(),
+  role: z.enum(['ADMIN', 'DOCTOR', 'NURSE', 'PATIENT', 'RECEPTIONIST', 'PHARMACIST', 'LAB_TECHNICIAN'], {
+    errorMap: () => ({ message: 'Invalid role' }),
+  }),
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER', 'PREFER_NOT_TO_SAY']).optional(),
+});
+
+export type CreateUserDto = z.infer<typeof createUserSchema>;

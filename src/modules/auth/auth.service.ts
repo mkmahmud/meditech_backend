@@ -30,7 +30,7 @@ export class AuthService {
   async register(registerDto: RegisterDto) {
     const { email, password, role, ...userData } = registerDto;
 
-    // Check if user already exists
+    // Check if user already exists 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -47,7 +47,7 @@ export class AuthService {
       data: {
         email,
         password: hashedPassword,
-        role: role as UserRole,
+        role: role as UserRole || UserRole.PATIENT,
         status: UserStatus.PENDING_VERIFICATION,
         ...userData,
       },
@@ -345,5 +345,155 @@ export class AuthService {
     this.logger.log(`Password changed for user: ${user.email}`);
 
     return { message: 'Password changed successfully' };
+  }
+
+  /**
+   * Assign role to a user (Admin/Super Admin only)
+   */
+  async assignRole(adminId: string, assignRoleDto: { userId: string; role: UserRole }) {
+    const { userId, role } = assignRoleDto;
+
+    // Verify admin exists and has proper permissions
+    const admin = await this.prisma.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, email: true, role: true },
+    });
+
+    if (!admin) {
+      throw new UnauthorizedException('Admin user not found');
+    }
+
+    // Only SUPER_ADMIN can assign SUPER_ADMIN role
+    if (role === UserRole.SUPER_ADMIN && admin.role !== UserRole.SUPER_ADMIN) {
+      throw new UnauthorizedException('Only Super Admin can assign Super Admin role');
+    }
+
+    // Find target user
+    const targetUser = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, email: true, role: true },
+    });
+
+    if (!targetUser) {
+      throw new BadRequestException('Target user not found');
+    }
+
+    // Update user role
+    const updatedUser = await this.prisma.user.update({
+      where: { id: userId },
+      data: { role },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    this.logger.log(
+      `Role updated for user ${targetUser.email} from ${targetUser.role} to ${role} by admin ${admin.email}`,
+    );
+
+    return {
+      message: `Role assigned successfully. User ${targetUser.email} is now ${role}`,
+      user: updatedUser,
+    };
+  }
+
+
+
+  /**
+   * Create a new user (Admin/Super Admin only)
+   */
+  async createUserByAdmin(adminId: string, createUserDto: any) {
+    const { email, role, firstName, lastName, phoneNumber, dateOfBirth, gender } = createUserDto;
+
+    // Verify admin exists
+    const admin = await this.prisma.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, email: true, role: true },
+    });
+
+    if (!admin) {
+      throw new UnauthorizedException('Admin user not found');
+    }
+
+    // Only SUPER_ADMIN can create ADMIN or SUPER_ADMIN roles
+    if ((role === UserRole.ADMIN || role === UserRole.SUPER_ADMIN) && admin.role !== UserRole.SUPER_ADMIN) {
+      throw new UnauthorizedException('Only Super Admin can create Admin or Super Admin users');
+    }
+
+    // Check if user already exists
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException('User with this email already exists');
+    }
+
+    // Use default temporary password
+    const temporaryPassword = 'Temp123!';
+    const hashedPassword = await this.hashPassword(temporaryPassword);
+
+    // Create user
+    const newUser = await this.prisma.user.create({
+      data: {
+        email,
+        password: hashedPassword,
+        firstName,
+        lastName,
+        phoneNumber,
+        dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
+        gender,
+        role: role as UserRole,
+        status: UserStatus.ACTIVE,
+      },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phoneNumber: true,
+        dateOfBirth: true,
+        gender: true,
+        role: true,
+        status: true,
+        createdAt: true,
+      },
+    });
+
+    // Create related profiles based on role
+    if (role === 'PATIENT') {
+      await this.prisma.patient.create({
+        data: {
+          userId: newUser.id,
+        },
+      });
+    } else if (role === 'DOCTOR') {
+      await this.prisma.doctor.create({
+        data: {
+          userId: newUser.id,
+          licenseNumber: `TEMP-${newUser.id}`,
+          specialization: 'General',
+          qualifications: [],
+          experience: 0,
+          consultationFee: 0,
+        },
+      });
+    }
+
+    this.logger.log(
+      `New user ${email} (${role}) created by admin ${admin.email}`,
+    );
+
+    return {
+      message: 'User created successfully',
+      user: newUser,
+      defaultPassword: temporaryPassword,
+      note: 'Default password has been set. Users must change it on first login.',
+    };
   }
 }

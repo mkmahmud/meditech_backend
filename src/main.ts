@@ -40,6 +40,8 @@ async function bootstrap() {
   // Compression
   app.use(compression());
 
+
+
   // Cookie parser
   app.use(cookieParser());
 
