@@ -22,7 +22,7 @@ import { RolesGuard } from './guards/roles.guard';
         signOptions: {
           expiresIn: configService.get<string>(
             'JWT_ACCESS_TOKEN_EXPIRATION',
-            '15m',
+            '1d',
           ),
         },
       }),

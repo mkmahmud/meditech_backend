@@ -3,7 +3,7 @@ import { PrismaService } from '@/common/prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findAll() {
     return this.prisma.user.findMany({
@@ -39,5 +39,25 @@ export class UsersService {
     });
   }
 
-  // Add more user management methods here
+  // Update Profile  
+  async updateProfile(userId: string, data: any) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { ...data },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phoneNumber: true,
+        role: true,
+        status: true,
+        profileImageUrl: true,
+        // If they are a doctor or patient, include those IDs too
+        doctor: true,
+        patient: true,
+      }
+    });
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -10,7 +10,7 @@ import { UserRole } from '@prisma/client';
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Get()
   @Roles(UserRole.ADMIN, UserRole.SUPER_ADMIN)
@@ -23,5 +23,22 @@ export class UsersController {
   @ApiOperation({ summary: 'Get user by ID' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
+  }
+
+  // Update User Profile 
+
+  @Patch('profile')
+  async updateProfile(
+    @Req() req: any,
+    @Body() updateData: any,
+  ) {
+    const userId = req.user.id;
+
+    if (!userId) {
+      throw new BadRequestException('USER_IDENTITY_NOT_FOUND');
+    }
+
+    // This calls your service: this.prisma.user.update(...)
+    return this.usersService.updateProfile(userId, updateData);
   }
 }

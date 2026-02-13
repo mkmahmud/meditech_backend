@@ -496,4 +496,68 @@ export class AuthService {
       note: 'Default password has been set. Users must change it on first login.',
     };
   }
+
+
+  /**
+   * Get full user profile including role-specific relations
+   */
+  async getProfile(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        doctor: true,
+        patient: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User profile not found');
+    }
+
+    // Remove sensitive data before returning
+    const { password, ...result } = user;
+    return result;
+  }
+
+  /**
+ * Update User and nested Profile data atomically
+ */
+  async updateProfile(userId: string, updateDto: any) {
+    const { doctor, patient, ...userUpdateData } = updateDto;
+
+    return this.prisma.$transaction(async (tx) => {
+      // 1. Update Core User Data
+      const updatedUser = await tx.user.update({
+        where: { id: userId },
+        data: {
+          ...userUpdateData,
+          // 2. Nested Update for Doctor if data is provided
+          ...(doctor && {
+            doctor: {
+              update: {
+                ...doctor,
+              },
+            },
+          }),
+          // 3. Nested Update for Patient if data is provided
+          ...(patient && {
+            patient: {
+              update: {
+                ...patient,
+              },
+            },
+          }),
+        },
+        include: {
+          doctor: true,
+          patient: true,
+        },
+      });
+
+      const { password, ...result } = updatedUser;
+      return result;
+    });
+  }
+
 }
+

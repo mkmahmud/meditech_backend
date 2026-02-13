@@ -106,8 +106,8 @@ export class AuthController {
   @Get('me')
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiResponse({ status: 200, description: 'User profile retrieved' })
-  async getProfile(@CurrentUser() user: any) {
-    return { user };
+  async getProfile(@CurrentUser('id') userId: string) {
+    return this.authService.getProfile(userId);
   }
 
   @ApiBearerAuth('JWT-auth')
@@ -142,4 +142,7 @@ export class AuthController {
   ) {
     return this.authService.createUserByAdmin(adminId, createUserDto);
   }
+
+
+
 }
