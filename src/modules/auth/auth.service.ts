@@ -74,8 +74,8 @@ export class AuthService {
       await this.prisma.doctor.create({
         data: {
           userId: user.id,
-          licenseNumber: `TEMP-${user.id}`, // Temporary, to be updated
-          specialization: 'General', // To be updated
+          licenseNumber: `TEMP-${user.id}`,
+          specialization: 'CARDIOLOGY',
           qualifications: [],
           experience: 0,
           consultationFee: 0,
@@ -477,7 +477,7 @@ export class AuthService {
         data: {
           userId: newUser.id,
           licenseNumber: `TEMP-${newUser.id}`,
-          specialization: 'General',
+          specialization: 'CARDIOLOGY',
           qualifications: [],
           experience: 0,
           consultationFee: 0,

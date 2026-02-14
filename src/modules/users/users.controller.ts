@@ -2,7 +2,7 @@ import { BadRequestException, Body, Controller, Get, Param, Patch, Req, UseGuard
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Roles } from '@/common/decorators/auth.decorator';
+import { Public, Roles } from '@/common/decorators/auth.decorator';
 import { UserRole } from '@prisma/client';
 
 @ApiTags('Users')
@@ -17,6 +17,13 @@ export class UsersController {
   @ApiOperation({ summary: 'Get all users (Admin only)' })
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @Public()
+  @Get('doctors')
+  @ApiOperation({ summary: 'Get all Doctors ' })
+  findDoctors() {
+    return this.usersService.findDoctors();
   }
 
   @Get(':id')

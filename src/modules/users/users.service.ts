@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/common/prisma/prisma.service';
+import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -18,6 +19,28 @@ export class UsersService {
         createdAt: true,
       },
     });
+  }
+
+  // Find Doctors
+  async findDoctors() {
+    return this.prisma.user.findMany({
+      where: {
+        role: UserRole.DOCTOR
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        profileImageUrl: true,
+        doctor: {
+          select: {
+            specialization: true,
+            experience: true,
+            consultationFee: true,
+          }
+        }
+      }
+    })
   }
 
   async findOne(id: string) {
@@ -41,9 +64,29 @@ export class UsersService {
 
   // Update Profile  
   async updateProfile(userId: string, data: any) {
+    const { doctor, patient, ...userData } = data;
+
     return this.prisma.user.update({
       where: { id: userId },
-      data: { ...data },
+      data: {
+        ...userData,
+        ...(doctor && {
+          doctor: {
+            update: {
+              ...doctor,
+              experience: doctor.experience ? Number(doctor.experience) : undefined,
+              consultationFee: doctor.consultationFee ? Number(doctor.consultationFee) : undefined,
+            }
+          }
+        }),
+        ...(patient && {
+          patient: {
+            update: {
+              ...patient
+            }
+          }
+        })
+      },
       select: {
         id: true,
         email: true,
@@ -53,7 +96,6 @@ export class UsersService {
         role: true,
         status: true,
         profileImageUrl: true,
-        // If they are a doctor or patient, include those IDs too
         doctor: true,
         patient: true,
       }

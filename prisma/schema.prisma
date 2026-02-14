@@ -105,6 +105,19 @@ enum AuditAction {
   PRINT
 }
 
+enum Specialization {
+  CARDIOLOGY
+  DERMATOLOGY
+  PEDIATRICS
+  NEUROLOGY
+  ORTHOPEDICS
+  PSYCHIATRY
+  GENERAL_PRACTICE
+  GYNECOLOGY
+  OPHTHALMOLOGY
+  ONCOLOGY
+}
+
 // =============================================
 // USER MANAGEMENT
 // =============================================
@@ -284,9 +297,9 @@ model Doctor {
   
   // Professional Information
   licenseNumber     String      @unique
-  specialization    String
+  specialization    Specialization?
   qualifications    String[]
-  experience        Int         // Years of experience
+  experience        Int          
   consultationFee   Float
   
   // Availability
