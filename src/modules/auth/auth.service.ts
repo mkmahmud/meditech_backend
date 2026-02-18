@@ -10,7 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '@/common/prisma/prisma.service';
 import { RedisService } from '@/common/redis/redis.service';
-import { UserRole, UserStatus } from '@prisma/client';
+import { UserRole, UserStatus, Specialization } from '@prisma/client';
 import { LoginDto, RegisterDto } from './schemas/auth.schema';
 
 @Injectable()
@@ -48,7 +48,7 @@ export class AuthService {
         email,
         password: hashedPassword,
         role: role as UserRole || UserRole.PATIENT,
-        status: UserStatus.PENDING_VERIFICATION,
+        status: UserStatus.ACTIVE,
         ...userData,
       },
       select: {
@@ -63,19 +63,19 @@ export class AuthService {
     });
 
     // Create patient or doctor profile based on role
-    if (role === 'PATIENT') {
+    if (user?.role === UserRole.PATIENT) {
       await this.prisma.patient.create({
         data: {
           userId: user.id,
         },
       });
-    } else if (role === 'DOCTOR') {
+    } else if (user?.role === UserRole.DOCTOR) {
       // Doctor profile will be completed separately with license info
       await this.prisma.doctor.create({
         data: {
           userId: user.id,
           licenseNumber: `TEMP-${user.id}`,
-          specialization: 'CARDIOLOGY',
+          specialization: Specialization.CARDIOLOGY,
           qualifications: [],
           experience: 0,
           consultationFee: 0,
@@ -83,7 +83,7 @@ export class AuthService {
       });
     }
 
-    this.logger.log(`New user registered: ${email} (${role})`);
+    this.logger.log(`New user registered: ${email} (${user?.role})`);
 
     // TODO: Send verification email
     // await this.sendVerificationEmail(user.email);

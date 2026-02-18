@@ -115,14 +115,14 @@ async function bootstrap() {
       },
     });
 
-    console.log(`📚 Swagger documentation available at: http://localhost:${configService.get('PORT')}/api/docs`);
+    console.log(` Swagger documentation available at: http://localhost:${configService.get('PORT')}/api/docs`);
   }
 
   const port = configService.get('PORT', 5000);
   await app.listen(port);
 
-  console.log(`🚀 MediTech Backend is running on: http://localhost:${port}/${apiPrefix}`);
-  console.log(`🔒 HIPAA Compliance Mode: ${configService.get('ENABLE_AUDIT_LOGGING') ? 'ENABLED' : 'DISABLED'}`);
+  console.log(`  MediTech Backend is running on: http://localhost:${port}/${apiPrefix}`);
+  console.log(` HIPAA Compliance Mode: ${configService.get('ENABLE_AUDIT_LOGGING') ? 'ENABLED' : 'DISABLED'}`);
 }
 
 bootstrap();
