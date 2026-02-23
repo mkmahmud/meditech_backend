@@ -1,7 +1,10 @@
 
 /node_modules
 /dist
+/logs
 .env
 .env.local
 .env.*.local
-/logs
+
+*.log
+.vercel

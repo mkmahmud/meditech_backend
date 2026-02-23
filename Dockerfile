@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run prisma:generate
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["npm", "run", "start:dev"]
 
@@ -43,6 +43,6 @@ RUN npm ci --only=production && npm cache clean --force
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["node", "dist/main.js"]
