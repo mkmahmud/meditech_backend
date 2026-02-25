@@ -24,12 +24,11 @@ import {
   AssignRoleDto,
   CreateUserDto,
 } from './schemas/auth.schema';
-import { Public } from '@/common/decorators/auth.decorator';
-import { CurrentUser } from '@/common/decorators/current-user.decorator';
-import { Roles } from '@/common/decorators/auth.decorator';
+import { Public, Roles } from '../../common/decorators/auth.decorator';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
-import { ZodValidationPipe } from '@/common/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
 
 @ApiTags('Authentication')
 @Controller('auth')

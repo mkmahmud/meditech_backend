@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -118,7 +119,9 @@ async function bootstrap() {
     console.log(` Swagger documentation available at: http://localhost:${configService.get('PORT')}/api/docs`);
   }
 
-  const port = configService.get('PORT', 5000);
+
+
+  const port = process.env.PORT || 5000;
   await app.listen(port);
 
   console.log(`  MediTech Backend is running on: http://localhost:${port}/${apiPrefix}`);

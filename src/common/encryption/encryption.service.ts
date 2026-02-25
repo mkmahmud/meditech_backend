@@ -1,6 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as CryptoJS from 'crypto-js';
 import * as crypto from 'crypto';
 
 @Injectable()

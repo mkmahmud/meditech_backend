@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@/common/prisma/prisma.service';
-import { EncryptionService } from '@/common/encryption/encryption.service';
+// import { PrismaService } from '@/common/prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
+import { EncryptionService } from '../../common/encryption/encryption.service';
 
 @Injectable()
 export class PatientsService {
   constructor(
     private prisma: PrismaService,
     private encryptionService: EncryptionService,
-  ) {}
+  ) { }
 
   // Patient management methods will be implemented here
   async getPatientProfile(patientId: string) {
@@ -32,4 +33,11 @@ export class PatientsService {
 
     return patient;
   }
+
+  async getHealthRecord(patientId: string) {
+    const healthRecord = { msg: `Health record for patient ${patientId}` };
+
+    return healthRecord;
+  }
+
 }

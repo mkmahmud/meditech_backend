@@ -33,32 +33,50 @@ import { AuthModule } from './modules/auth/auth.module';
     }),
 
     // Logging (Winston)
+    // WinstonModule.forRoot({
+    //   transports: [
+    //     new winston.transports.Console({
+    //       format: winston.format.combine(
+    //         winston.format.timestamp(),
+    //         winston.format.colorize(),
+    //         winston.format.printf(({ timestamp, level, message, context, trace }) => {
+    //           return `${timestamp} [${context}] ${level}: ${message}${trace ? `\n${trace}` : ''}`;
+    //         }),
+    //       ),
+    //     }),
+    //     new winston.transports.File({
+    //       filename: 'logs/error.log',
+    //       level: 'error',
+    //       format: winston.format.combine(
+    //         winston.format.timestamp(),
+    //         winston.format.json(),
+    //       ),
+    //     }),
+    //     new winston.transports.File({
+    //       filename: 'logs/combined.log',
+    //       format: winston.format.combine(
+    //         winston.format.timestamp(),
+    //         winston.format.json(),
+    //       ),
+    //     }),
+    //   ],
+    // }),
+
     WinstonModule.forRoot({
       transports: [
         new winston.transports.Console({
           format: winston.format.combine(
             winston.format.timestamp(),
-            winston.format.colorize(),
-            winston.format.printf(({ timestamp, level, message, context, trace }) => {
-              return `${timestamp} [${context}] ${level}: ${message}${trace ? `\n${trace}` : ''}`;
-            }),
+            winston.format.ms(),
+            // Add fancy colors for dev, plain text for prod
+            winston.format.colorize({ all: true }),
+            winston.format.printf((info) => `${info.timestamp} [${info.level}] ${info.message}`),
           ),
         }),
-        new winston.transports.File({
-          filename: 'logs/error.log',
-          level: 'error',
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.json(),
-          ),
-        }),
-        new winston.transports.File({
-          filename: 'logs/combined.log',
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.json(),
-          ),
-        }),
+        // ONLY add File transport if NOT on Vercel/Production
+        ...(process.env.NODE_ENV !== 'production'
+          ? [new winston.transports.File({ filename: 'logs/combined.log' })]
+          : []),
       ],
     }),
 

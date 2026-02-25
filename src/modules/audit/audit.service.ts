@@ -1,5 +1,6 @@
+// import { PrismaService } from '@/common/prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '@/common/prisma/prisma.service';
 import { AuditAction } from '@prisma/client';
 
 export interface AuditLogData {
@@ -23,7 +24,7 @@ export interface AuditLogData {
 export class AuditService {
   private readonly logger = new Logger(AuditService.name);
 
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   /**
    * Create audit log entry

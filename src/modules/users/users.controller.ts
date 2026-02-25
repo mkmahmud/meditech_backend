@@ -2,7 +2,8 @@ import { BadRequestException, Body, Controller, Get, Param, Patch, Req, UseGuard
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { Public, Roles } from '@/common/decorators/auth.decorator';
+import { Public, Roles } from '../../common/decorators/auth.decorator';
+
 import { UserRole } from '@prisma/client';
 
 @ApiTags('Users')

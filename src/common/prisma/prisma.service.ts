@@ -1,84 +1,41 @@
-import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
+import { Injectable, OnModuleInit, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService extends PrismaClient implements OnModuleInit {
   private readonly logger = new Logger(PrismaService.name);
 
   constructor() {
     super({
-      log: [
-        {
-          emit: 'event',
-          level: 'query',
-        },
-        {
-          emit: 'event',
-          level: 'error',
-        },
-        {
-          emit: 'event',
-          level: 'info',
-        },
-        {
-          emit: 'event',
-          level: 'warn',
-        },
-      ],
-      errorFormat: 'colorless',
-    });
-
-    // Log queries in development
-    if (process.env.NODE_ENV === 'development') {
-      this.$on('query' as never, (e: any) => {
-        this.logger.debug(`Query: ${e.query}`);
-        this.logger.debug(`Duration: ${e.duration}ms`);
-      });
-    }
-
-    this.$on('error' as never, (e: any) => {
-      this.logger.error(`Error: ${e.message}`);
-    });
-
-    this.$on('warn' as never, (e: any) => {
-      this.logger.warn(`Warning: ${e.message}`);
+      log: process.env.NODE_ENV === 'development'
+        ? ['query', 'info', 'warn', 'error']
+        : ['error'], // Minimal logging in production to save execution time
     });
   }
 
   async onModuleInit() {
     try {
+      // In serverless, we want to connect as late as possible 
+      // or rely on Prisma's lazy connection, but a ping ensures the DB is up.
       await this.$connect();
-      this.logger.log('✅ Database connected successfully');
+      this.logger.log('✅ Database connected');
     } catch (error) {
       this.logger.error('❌ Database connection failed', error);
-      throw error;
+      // Don't throw error here in serverless or the whole lambda fails to start
     }
-  }
-
-  async onModuleDestroy() {
-    await this.$disconnect();
-    this.logger.log('Database disconnected');
   }
 
   // Helper method for soft deletes
   async softDelete(model: string, id: string) {
-    // @ts-ignore
-    return this[model].update({
+    return (this as any)[model].update({
       where: { id },
       data: { deletedAt: new Date() },
     });
   }
 
-  // Helper method to exclude soft deleted records
-  excludeDeleted() {
-    return {
-      deletedAt: null,
-    };
-  }
-
   // Transaction helper
   async runTransaction<T>(
-    callback: (prisma: Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>) => Promise<T>,
+    callback: (prisma: PrismaClient) => Promise<T>,
   ): Promise<T> {
     return this.$transaction(callback);
   }

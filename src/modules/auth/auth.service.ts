@@ -8,8 +8,9 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from '@/common/prisma/prisma.service';
-import { RedisService } from '@/common/redis/redis.service';
+// import { PrismaService } from '@/common/prisma/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
+import { RedisService } from '../../common/redis/redis.service';
 import { UserRole, UserStatus, Specialization } from '@prisma/client';
 import { LoginDto, RegisterDto } from './schemas/auth.schema';
 
