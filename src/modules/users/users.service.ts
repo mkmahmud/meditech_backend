@@ -23,11 +23,33 @@ export class UsersService {
   }
 
   // Find Doctors
-  async findDoctors() {
-    return this.prisma.user.findMany({
-      where: {
-        role: UserRole.DOCTOR
-      },
+  async findDoctors({ specialization, name, days, page = 1, limit = 10 }: { specialization?: string; name?: string; days?: string | string[]; page?: number; limit?: number }) {
+    const skip = (page - 1) * limit;
+
+    // Parse days - handle both array and string formats
+    let dayArray: number[] | undefined;
+    if (days) {
+      if (Array.isArray(days)) {
+        dayArray = days.map(d => parseInt(d)).filter(d => !isNaN(d));
+      } else if (typeof days === 'string') {
+        dayArray = days.split(',').map(d => parseInt(d.trim())).filter(d => !isNaN(d));
+      }
+    }
+
+    const where = {
+      role: UserRole.DOCTOR,
+      ...(specialization && { doctor: { is: { specialization: { equals: specialization } } } }),
+      ...(name && { firstName: { contains: name, mode: 'insensitive' } }),
+      ...(dayArray && dayArray.length > 0 && { doctor: { is: { availability: { some: { dayOfWeek: { in: dayArray } } } } } }),
+    };
+
+    // Get total count before pagination
+    // @ts-ignore
+    const total = await this.prisma.user.count({ where });
+
+    const data = await this.prisma.user.findMany({
+      // @ts-ignore
+      where,
       select: {
         id: true,
         firstName: true,
@@ -40,10 +62,26 @@ export class UsersService {
             consultationFee: true,
           }
         }
+      },
+      skip,
+      take: limit,
+    });
+
+    // Return data with pagination metadata
+    return {
+      data,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+        hasNextPage: page < Math.ceil(total / limit),
+        hasPreviousPage: page > 1,
       }
-    })
+    };
   }
 
+  // Find Single Doctor by ID
   async findOne(id: string) {
     return this.prisma.user.findUnique({
       where: { id },

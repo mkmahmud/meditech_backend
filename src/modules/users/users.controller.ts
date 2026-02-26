@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Patch, Query, Req, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -20,11 +20,32 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  // Get all Doctors with filtering and pagination
   @Public()
   @Get('doctors')
-  @ApiOperation({ summary: 'Get all Doctors ' })
-  findDoctors() {
-    return this.usersService.findDoctors();
+  @ApiOperation({ summary: 'Get all Doctors' })
+  findDoctors(
+    @Query('specialization') specialization?: string,
+    @Query('name') name?: string,
+    @Query('days') days?: string[],
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    // Validate days if provided (should be numbers: 0-6)
+    if (days && Array.isArray(days)) {
+      const dayArray = days.map(d => parseInt(d));
+      if (dayArray.some(d => isNaN(d) || d < 0 || d > 6)) {
+        throw new BadRequestException('Days must be 0-6 (0=Sunday, 6=Saturday): ?days=2&days=3&days=4');
+      }
+    }
+
+    return this.usersService.findDoctors({
+      specialization,
+      name,
+      days,
+      page: page ? parseInt(page) : 1,
+      limit: limit ? parseInt(limit) : 10,
+    });
   }
 
   @Get(':id')
