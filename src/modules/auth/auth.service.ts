@@ -257,7 +257,7 @@ export class AuthService {
           secret: this.configService.get<string>('JWT_SECRET'),
           expiresIn: this.configService.get<string>(
             'JWT_ACCESS_TOKEN_EXPIRATION',
-            '15m',
+            '1d',
           ),
         },
       ),
