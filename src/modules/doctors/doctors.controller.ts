@@ -33,4 +33,14 @@ export class DoctorsController {
         return this.doctorsService.createDoctorAvailability(doctorId, availabilityData);
     }
 
+    // Get Doctor Profile
+    @Public()
+    @Get(':id/profile')
+    @ApiOperation({ summary: 'Get doctor profile' })
+    async getDoctorProfile(@Param('id') doctorId: string) {
+        return this.doctorsService.getDoctorProfile(doctorId);
+    }
+
+
+
 }

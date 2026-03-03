@@ -1,11 +1,24 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { AppointmentsService } from "./appointments.service";
 import { RolesGuard } from "../auth/guards/roles.guard";
 import { Roles } from "../../common/decorators/auth.decorator";
 import { ZodValidationPipe } from "../../common/pipes/zod-validation.pipe";
-import { CreateAppointmentDTO, createAppointmentSchema } from "./schemas/appointments.schema";
+import {
+    CreateAppointmentDTO,
+    createAppointmentSchema,
+    GetAppointmentsByDoctorIdDTO,
+    getAppointmentsByDoctorIdSchema,
+    GetAppointmentsByPatientIdDTO,
+    getAppointmentsByPatientIdSchema,
+    CancelAppointmentDTO,
+    cancelAppointmentSchema,
+    GetAppointmentDetailsByIdDTO,
+    getAppointmentDetailsByIdSchema,
+    CompleteAppointmentDTO,
+    completeAppointmentSchema
+} from "./schemas/appointments.schema";
 
 
 
@@ -14,6 +27,7 @@ import { CreateAppointmentDTO, createAppointmentSchema } from "./schemas/appoint
 @UseGuards(JwtAuthGuard)
 @Controller('appointments')
 export class AppointmentsController {
+
     constructor(private readonly appointmentsService: AppointmentsService) { }
 
     // Create Appointment -  Patient  only
@@ -42,13 +56,9 @@ export class AppointmentsController {
     @ApiOperation({ summary: 'Get appointments by doctor ID (Doctor only)' })
     @ApiResponse({ status: 200, description: 'Appointments retrieved successfully' })
     async getAppointmentsByDoctorId(
-
-        @Param('doctorId') doctorId: string,
-        @Param('date') date?: string,
-
+        @Query(new ZodValidationPipe(getAppointmentsByDoctorIdSchema)) query: GetAppointmentsByDoctorIdDTO,
     ) {
-
-        return this.appointmentsService.getAppointmentsByDoctorId(doctorId, date);
+        return this.appointmentsService.getAppointmentsByDoctorId(query.doctorId, query.date);
     }
 
     // Get Appointments by Patient ID - Patient only
@@ -60,10 +70,55 @@ export class AppointmentsController {
     @ApiOperation({ summary: 'Get appointments by patient ID (Patient only)' })
     @ApiResponse({ status: 200, description: 'Appointments retrieved successfully' })
     async getAppointmentsByPatientId(
-        @Param('patientId') patientId: string,
+        @Query(new ZodValidationPipe(getAppointmentsByPatientIdSchema)) query: GetAppointmentsByPatientIdDTO,
     ) {
-        return this.appointmentsService.getAppointmentsByPatientId(patientId);
+        return this.appointmentsService.getAppointmentsByPatientId(query.patientId);
     }
 
+    // Cancel Appointment - Doctor and Patient
+    @ApiBearerAuth('JWT-auth')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('DOCTOR', 'PATIENT')
+    @Post('cancel-appointment')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Cancel an appointment (Doctor and Patient)' })
+    @ApiResponse({ status: 200, description: 'Appointment cancelled successfully' })
+    @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    async cancelAppointment(
+        @Body(new ZodValidationPipe(cancelAppointmentSchema)) cancelAppointmentDto: CancelAppointmentDTO,
+    ) {
+        return this.appointmentsService.cancelAppointment(cancelAppointmentDto);
+    }
+
+
+    // Get Appointment Details - Doctor and Patient
+    @ApiBearerAuth('JWT-auth')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('DOCTOR', 'PATIENT')
+    @Get('get-appointment-details/:appointmentId')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Get appointment details (Doctor and Patient)' })
+    @ApiResponse({ status: 200, description: 'Appointment details retrieved successfully' })
+    @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    async getAppointmentDetailsById(
+        @Param(new ZodValidationPipe(getAppointmentDetailsByIdSchema)) params: GetAppointmentDetailsByIdDTO,
+    ) {
+        return this.appointmentsService.getAppointmentDetailsById(params.appointmentId);
+    }
+
+    // Complete Appointment - Doctor only
+    @ApiBearerAuth('JWT-auth')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('DOCTOR')
+    @Post('complete-appointment')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Complete an appointment (Doctor only)' })
+    @ApiResponse({ status: 200, description: 'Appointment marked as completed successfully' })
+    @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    async completeAppointment(
+        @Body(new ZodValidationPipe(completeAppointmentSchema)) completeAppointmentDto: CompleteAppointmentDTO,
+    ) {
+        return this.appointmentsService.completeAppointmentByDoctor(completeAppointmentDto);
+    }
 
 }

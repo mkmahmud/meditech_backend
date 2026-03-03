@@ -1,6 +1,10 @@
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { CreateAppointmentDTO } from './schemas/appointments.schema';
+import {
+    CreateAppointmentDTO,
+    CancelAppointmentDTO,
+    CompleteAppointmentDTO
+} from './schemas/appointments.schema';
 import { AppointmentStatus } from '@prisma/client';
 
 
@@ -48,6 +52,11 @@ export class AppointmentsService {
 
     // Get Appointments by Doctor ID
     async getAppointmentsByDoctorId(doctorId: string, date?: string) {
+
+        if (!doctorId) {
+            throw new NotFoundException("Doctor ID is required");
+        }
+
         const appointments = await this.prisma.appointment.findMany({
             where: {
                 doctorId,
@@ -61,6 +70,23 @@ export class AppointmentsService {
                 duration: true,
                 chiefComplaint: true,
                 status: true,
+                patient: {
+                    select: {
+                        id: true,
+                        bloodType: true,
+                        user: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                profileImageUrl: true,
+                                phoneNumber: true,
+                                gender: true,
+                                dateOfBirth: true,
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -70,20 +96,129 @@ export class AppointmentsService {
 
     // Get Appointments by Patient ID
     async getAppointmentsByPatientId(patientId: string) {
+        if (!patientId) {
+            throw new NotFoundException("Patient ID is required");
+        }
+
         const appointments = await this.prisma.appointment.findMany({
             where: { patientId },
-            select: {
-                id: true,
-                doctorId: true,
-                scheduledAt: true,
-                type: true,
-                duration: true,
-                chiefComplaint: true,
-                status: true,
+            include: {
+                doctor: {
+                    select: {
+                        id: true,
+                        specialization: true,
+                        consultationFee: true,
+                        user: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                profileImageUrl: true,
+                            }
+                        }
+                    }
+                },
+                patient: {
+                    select: {
+                        id: true,
+                        user: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                profileImageUrl: true,
+                            }
+                        }
+                    }
+                }
             }
         });
         return appointments;
     }
+
+
+    // Cancel Appointment
+    async cancelAppointment(data: CancelAppointmentDTO) {
+        const { appointmentId, patientId, doctorId, cancellationReason } = data;
+        const appointment = await this.prisma.appointment.findUnique({
+            where: { id: appointmentId, patientId, doctorId },
+        });
+
+        if (!appointment) throw new NotFoundException("Appointment not found");
+
+        return await this.prisma.appointment.update({
+            where: { id: appointmentId },
+            data: { status: AppointmentStatus.CANCELLED, cancellationReason: cancellationReason, cancelledAt: new Date() },
+        });
+    }
+
+
+    // Get Appointment Details by ID
+    async getAppointmentDetailsById(appointmentId: string) {
+        const appointment = await this.prisma.appointment.findUnique({
+            where: { id: appointmentId },
+            include: {
+                doctor: {
+                    select: {
+                        id: true,
+                        specialization: true,
+                        consultationFee: true,
+                        user: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                profileImageUrl: true,
+                                phoneNumber: true,
+                                email: true,
+                            }
+                        }
+                    }
+                },
+                patient: {
+                    select: {
+                        id: true,
+                        bloodType: true,
+                        user: {
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                profileImageUrl: true,
+                                phoneNumber: true,
+                                email: true,
+                                dateOfBirth: true,
+                                gender: true,
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if (!appointment) throw new NotFoundException("Appointment not found");
+
+        return appointment;
+    }
+
+
+    // Complete By Doctor - Doctor only
+    async completeAppointmentByDoctor(data: CompleteAppointmentDTO) {
+        const { appointmentId, doctorId, diagnosis, notes } = data;
+        const appointment = await this.prisma.appointment.findUnique({
+            where: { id: appointmentId, doctorId },
+        });
+
+        if (!appointment) throw new NotFoundException("Appointment not found");
+
+        const updatedappointment = await this.prisma.appointment.update({
+            where: { id: appointmentId },
+            data: { status: AppointmentStatus.COMPLETED, diagnosis, notes, updatedAt: new Date() },
+        });
+
+        return updatedappointment;
+    }
+
 
 
 }

@@ -78,4 +78,28 @@ export class doctorsService {
             };
         });
     }
+
+    // Get Doctor Info
+    async getDoctorProfile(doctorId: string) {
+        const doctor = await this.prisma.user.findUnique({
+            where: { id: doctorId },
+            select: {
+                firstName: true,
+                lastName: true,
+                gender: true,
+                profileImageUrl: true,
+                doctor: {
+                    select: {
+                        id: true,
+                        specialization: true,
+                        experience: true,
+                        licenseNumber: true,
+                        consultationFee: true,
+                    }
+                }
+            }
+        });
+
+        return doctor;
+    }
 }
