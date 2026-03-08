@@ -20,11 +20,102 @@ export interface AuditLogData {
   errorMessage?: string;
 }
 
+export interface AuditLogQuery {
+  userId?: string;
+  resource?: string;
+  action?: AuditAction;
+  startDate?: string;
+  endDate?: string;
+  success?: string;
+  limit?: string;
+  offset?: string;
+}
+
 @Injectable()
 export class AuditService {
   private readonly logger = new Logger(AuditService.name);
 
   constructor(private prisma: PrismaService) { }
+
+  /**
+   * Get audit logs with filters and pagination
+   */
+  async getAuditLogs(query: AuditLogQuery) {
+    const {
+      userId,
+      resource,
+      action,
+      startDate,
+      endDate,
+      success,
+      limit,
+      offset,
+    } = query;
+
+    const where: any = {};
+
+    if (userId) {
+      where.userId = userId;
+    }
+
+    if (resource) {
+      where.resource = resource;
+    }
+
+    if (action) {
+      where.action = action;
+    }
+
+    if (success !== undefined) {
+      where.success = success === 'true';
+    }
+
+    if (startDate || endDate) {
+      where.timestamp = {};
+
+      if (startDate) {
+        where.timestamp.gte = new Date(startDate);
+      }
+
+      if (endDate) {
+        where.timestamp.lte = new Date(endDate);
+      }
+    }
+
+    const take = Math.min(Number(limit) || 100, 1000);
+    const skip = Math.max(Number(offset) || 0, 0);
+
+    const [logs, total] = await Promise.all([
+      this.prisma.auditLog.findMany({
+        where,
+        include: {
+          user: {
+            select: {
+              id: true,
+              email: true,
+              firstName: true,
+              lastName: true,
+              role: true,
+            },
+          },
+        },
+        orderBy: {
+          timestamp: 'desc',
+        },
+        take,
+        skip,
+      }),
+      this.prisma.auditLog.count({ where }),
+    ]);
+
+    return {
+      data: logs,
+      total,
+      limit: take,
+      offset: skip,
+      hasMore: skip + logs.length < total,
+    };
+  }
 
   /**
    * Create audit log entry
