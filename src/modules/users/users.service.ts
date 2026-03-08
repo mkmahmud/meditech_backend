@@ -103,26 +103,70 @@ export class UsersService {
 
   // Update Profile  
   async updateProfile(userId: string, data: any) {
-    const { doctor, patient, ...userData } = data;
+    const { doctor, patient, email, password, ...userData } = data;
+
+    // Helper function to clean data - remove null, undefined, and empty strings
+    const cleanData = (obj: any) => {
+      const cleaned: any = {};
+      for (const key in obj) {
+        if (obj[key] !== null && obj[key] !== undefined && obj[key] !== '') {
+          cleaned[key] = obj[key];
+        }
+      }
+      return cleaned;
+    };
+
+    // Clean user data
+    const cleanedUserData = cleanData(userData);
+
+    // Check if username is provided and validate uniqueness
+    if (cleanedUserData.username) {
+      const existingUser = await this.prisma.user.findUnique({
+        where: { username: cleanedUserData.username }
+      });
+
+      // If username exists and belongs to a different user, throw error
+      if (existingUser && existingUser.id !== userId) {
+        throw new Error('Username already exists. Please choose a different username.');
+      }
+    }
+
+    // Prepare doctor data if provided
+    let doctorData: any = undefined;
+    if (doctor) {
+      const cleanedDoctor = cleanData(doctor);
+      if (Object.keys(cleanedDoctor).length > 0) {
+        doctorData = {
+          ...cleanedDoctor,
+          experience: cleanedDoctor.experience ? Number(cleanedDoctor.experience) : undefined,
+          consultationFee: cleanedDoctor.consultationFee ? Number(cleanedDoctor.consultationFee) : undefined,
+        };
+        // Remove undefined values
+        doctorData = cleanData(doctorData);
+      }
+    }
+
+    // Prepare patient data if provided
+    let patientData: any = undefined;
+    if (patient) {
+      const cleanedPatient = cleanData(patient);
+      if (Object.keys(cleanedPatient).length > 0) {
+        patientData = cleanedPatient;
+      }
+    }
 
     return this.prisma.user.update({
       where: { id: userId },
       data: {
-        ...userData,
-        ...(doctor && {
+        ...cleanedUserData,
+        ...(doctorData && Object.keys(doctorData).length > 0 && {
           doctor: {
-            update: {
-              ...doctor,
-              experience: doctor.experience ? Number(doctor.experience) : undefined,
-              consultationFee: doctor.consultationFee ? Number(doctor.consultationFee) : undefined,
-            }
+            update: doctorData
           }
         }),
-        ...(patient && {
+        ...(patientData && Object.keys(patientData).length > 0 && {
           patient: {
-            update: {
-              ...patient
-            }
+            update: patientData
           }
         })
       },

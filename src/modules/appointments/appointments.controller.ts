@@ -58,7 +58,7 @@ export class AppointmentsController {
     async getAppointmentsByDoctorId(
         @Query(new ZodValidationPipe(getAppointmentsByDoctorIdSchema)) query: GetAppointmentsByDoctorIdDTO,
     ) {
-        return this.appointmentsService.getAppointmentsByDoctorId(query.doctorId, query.date);
+        return this.appointmentsService.getAppointmentsByDoctorId(query.doctorId, query.date, query.download);
     }
 
     // Get Appointments by Patient ID - Patient only

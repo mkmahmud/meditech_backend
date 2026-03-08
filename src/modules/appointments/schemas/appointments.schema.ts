@@ -1,6 +1,14 @@
 import { z } from "zod";
 
 const AppointmentTypeEnum = z.enum(["IN_PERSON", "TELEMEDICINE", "FOLLOW_UP", "EMERGENCY"]);
+const booleanQueryParam = z.preprocess((value) => {
+    if (typeof value === "string") {
+        const normalized = value.toLowerCase();
+        if (normalized === "true") return true;
+        if (normalized === "false") return false;
+    }
+    return value;
+}, z.boolean());
 
 // Create Appointment Schema
 export const createAppointmentSchema = z.object({
@@ -37,6 +45,7 @@ export type CreateAppointmentDTO = z.infer<typeof createAppointmentSchema>;
 export const getAppointmentsByDoctorIdSchema = z.object({
     doctorId: z.string().uuid("Invalid doctor ID"),
     date: z.string().optional(),
+    download: booleanQueryParam.optional(),
 });
 
 export type GetAppointmentsByDoctorIdDTO = z.infer<typeof getAppointmentsByDoctorIdSchema>;

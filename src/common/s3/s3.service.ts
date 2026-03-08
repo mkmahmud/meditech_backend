@@ -105,6 +105,44 @@ export class S3Service {
   }
 
   /**
+   * Get presigned URL for direct upload to S3 (Recommended for large files on Vercel)
+   * @param fileName - Original file name
+   * @param folder - S3 folder path
+   * @param contentType - File MIME type
+   * @param expiresIn - URL expiration time in seconds (default: 5 minutes)
+   * @returns Object with presigned URL and the key
+   */
+  async getPresignedUploadUrl(
+    fileName: string,
+    folder?: string,
+    contentType: string = 'application/octet-stream',
+    expiresIn: number = 300,
+  ): Promise<{ url: string; key: string }> {
+    try {
+      const fileExtension = fileName.split('.').pop();
+      const uniqueFileName = `${uuidv4()}.${fileExtension}`;
+      const key = folder ? `${folder}/${uniqueFileName}` : uniqueFileName;
+
+      const params = {
+        Bucket: this.bucketName,
+        Key: key,
+        Expires: expiresIn,
+        ContentType: contentType,
+        ServerSideEncryption: 'AES256',
+      };
+
+      const url = await this.s3.getSignedUrlPromise('putObject', params);
+
+      this.logger.log(`Generated presigned upload URL for: ${key}`);
+
+      return { url, key };
+    } catch (error) {
+      this.logger.error('Failed to generate presigned upload URL', error);
+      throw new Error('Failed to generate upload URL');
+    }
+  }
+
+  /**
    * Delete file from S3
    * @param key - S3 object key
    */

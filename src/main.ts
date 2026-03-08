@@ -45,12 +45,20 @@ async function bootstrap() {
   // Cookie parser
   app.use(cookieParser());
 
+  // Body parser configuration for file uploads
+  // Vercel has a 4.5MB limit for serverless functions
+  const bodyParser = require('body-parser');
+  app.use(bodyParser.json({ limit: '4mb' }));
+  app.use(bodyParser.urlencoded({ limit: '4mb', extended: true }));
+
   // CORS Configuration
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN'),
+    origin: configService.get('CORS_ORIGIN') || '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    exposedHeaders: ['Content-Length', 'Content-Type'],
+    maxAge: 86400, // 24 hours
   });
 
   // API Versioning
