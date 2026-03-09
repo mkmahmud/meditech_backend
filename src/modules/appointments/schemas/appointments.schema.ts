@@ -41,6 +41,13 @@ export const createAppointmentSchema = z.object({
 
 export type CreateAppointmentDTO = z.infer<typeof createAppointmentSchema>;
 
+// Confirm Appointment by Patient Schema
+export const confirmAppointmentBypatient = z.object({
+    appointmentId: z.string().uuid("Invalid appointment ID"),
+});
+
+export type ConfirmAppointemntDto = z.infer<typeof confirmAppointmentBypatient>;
+
 // Get Appointments by Doctor ID Schema
 export const getAppointmentsByDoctorIdSchema = z.object({
     doctorId: z.string().uuid("Invalid doctor ID"),

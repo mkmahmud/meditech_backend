@@ -110,6 +110,61 @@ export class AppointmentsService {
         return appointment;
     }
 
+    // Mark as appointment confirmed by Patient
+    async confirmAppointment(appointmentId: string) {
+        const appointment = await this.prisma.appointment.findUnique({
+            where: { id: appointmentId },
+        });
+
+        if (!appointment) {
+            throw new NotFoundException("Appointment not found");
+        }
+
+        const isScheduled = appointment.status === AppointmentStatus.SCHEDULED;
+        if (!isScheduled) {
+            throw new NotFoundException("Only scheduled appointments can be confirmed");
+        }
+
+        const updatedAppointment = await this.prisma.appointment.update({
+            where: { id: appointmentId },
+            data: { status: AppointmentStatus.CONFIRMED },
+        });
+
+        try {
+            // Send notification to doctor
+            await this.notificationsService.createNotification({
+                userId: appointment.doctorId,
+                type: NotificationType.APPOINTMENT_REMINDER,
+                title: 'Appointment Confirmed',
+                message: `The appointment with ${appointment.patientId} scheduled for ${new Date(appointment.scheduledAt).toLocaleString()} has been confirmed by the patient.`,
+                data: JSON.stringify({
+                    appointmentId: appointment.id,
+                    patientId: appointment.patientId,
+                    scheduledAt: appointment.scheduledAt,
+                }),
+            });
+            this.logger.log(`Appointment confirmation notification sent for appointment ${appointmentId}`);
+
+            await this.notificationsService.createNotification({
+                userId: appointment.patientId,
+                type: NotificationType.APPOINTMENT_REMINDER,
+                title: 'Appointment Confirmed',
+                message: `You have confirmed your appointment with Dr. ${appointment.doctorId} scheduled for ${new Date(appointment.scheduledAt).toLocaleString()}.`,
+                data: JSON.stringify({
+                    appointmentId: appointment.id,
+                    doctorId: appointment.doctorId,
+                    scheduledAt: appointment.scheduledAt,
+                }),
+            });
+            this.logger.log(`Appointment confirmation notification sent to patient for appointment ${appointmentId}`);
+
+        } catch (error) {
+            this.logger.error(`Failed to send appointment confirmation notification: ${error.message}`);
+        }
+
+        return updatedAppointment;
+    }
+
     // Get Appointments by Doctor ID
     async getAppointmentsByDoctorId(doctorId: string, date?: string, download?: boolean) {
 

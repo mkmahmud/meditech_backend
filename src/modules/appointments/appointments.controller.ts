@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { AppointmentsService } from "./appointments.service";
@@ -17,7 +17,9 @@ import {
     GetAppointmentDetailsByIdDTO,
     getAppointmentDetailsByIdSchema,
     CompleteAppointmentDTO,
-    completeAppointmentSchema
+    completeAppointmentSchema,
+    ConfirmAppointemntDto,
+    confirmAppointmentBypatient
 } from "./schemas/appointments.schema";
 
 
@@ -44,6 +46,21 @@ export class AppointmentsController {
         @Body(new ZodValidationPipe(createAppointmentSchema)) createAppointmentDto: CreateAppointmentDTO,
     ) {
         return this.appointmentsService.createAppointment(createAppointmentDto);
+    }
+
+    // Update Appointment schedule to confirm  - Patient only
+    @ApiBearerAuth('JWT-auth')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('PATIENT')
+    @Patch('confirm-appointment')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({ summary: 'Confirm an appointment (Patient only)' })
+    @ApiResponse({ status: 200, description: 'Appointment confirmed successfully' })
+    @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    async confirmAppointment(
+        @Body(new ZodValidationPipe(confirmAppointmentBypatient)) confirmAppointmentDto: ConfirmAppointemntDto,
+    ) {
+        return this.appointmentsService.confirmAppointment(confirmAppointmentDto.appointmentId);
     }
 
 

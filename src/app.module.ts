@@ -16,7 +16,7 @@ import { LabResultsModule } from './modules/lab-results/lab-results.module';
 import { InsuranceModule } from './modules/insurance/insurance.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
-import { AuditModule } from './modules/audit/audit.module';
+// import { AuditModule } from './modules/audit/audit.module';
 
 // Common Modules
 import { EncryptionModule } from './common/encryption/encryption.module';
@@ -108,7 +108,7 @@ import { AuthModule } from './modules/auth/auth.module';
     InsuranceModule,
     PaymentsModule,
     NotificationsModule,
-    AuditModule,
+    // AuditModule,
   ],
   controllers: [],
   providers: [],
