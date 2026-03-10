@@ -125,7 +125,7 @@ POST /api/v1/payments/create
 
 ```typescript
 1. Validate card number with Luhn algorithm
-   - 5555555555554444 → ✓ Valid
+   - 5555555555554444 → ✓ Valid 
    
 2. Validate expiry
    - Current: March 2026

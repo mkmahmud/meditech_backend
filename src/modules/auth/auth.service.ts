@@ -99,7 +99,7 @@ export class AuthService {
    * Login user
    */
   async login(loginDto: LoginDto) {
-    const { email, password } = loginDto;
+    const { email, password, rememberMe } = loginDto;
 
     // Find user
     const user = await this.prisma.user.findUnique({
@@ -171,8 +171,8 @@ export class AuthService {
       },
     });
 
-    // Generate tokens
-    const tokens = await this.generateTokens(user.id, user.email, user.role);
+    // Generate tokens with rememberMe flag
+    const tokens = await this.generateTokens(user.id, user.email, user.role, rememberMe);
 
     this.logger.log(`User logged in: ${email}`);
 
@@ -248,35 +248,34 @@ export class AuthService {
 
   /**
    * Generate access and refresh tokens
+   * @param rememberMe - If true, extends token expiration to 7d (access) and 30d (refresh). Default is 1d (access) and 7d (refresh)
    */
-  private async generateTokens(userId: string, email: string, role: string) {
+  private async generateTokens(userId: string, email: string, role: string, rememberMe: boolean = false) {
+    // Determine token expiration based on rememberMe flag
+    const accessTokenExpiry = rememberMe ? '7d' : '1d';
+    const refreshTokenExpiry = rememberMe ? '30d' : '7d';
+
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email, role },
         {
           secret: this.configService.get<string>('JWT_SECRET'),
-          expiresIn: this.configService.get<string>(
-            'JWT_ACCESS_TOKEN_EXPIRATION',
-            '1d',
-          ),
+          expiresIn: accessTokenExpiry,
         },
       ),
       this.jwtService.signAsync(
         { sub: userId, email, role },
         {
           secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-          expiresIn: this.configService.get<string>(
-            'JWT_REFRESH_TOKEN_EXPIRATION',
-            '7d',
-          ),
+          expiresIn: refreshTokenExpiry,
         },
       ),
     ]);
 
-    // Store refresh token in database
-    const expiresIn = this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRATION');
+    // Store refresh token in database with appropriate expiration
     const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 7); // 7 days
+    const daysToAdd = rememberMe ? 30 : 7;
+    expirationDate.setDate(expirationDate.getDate() + daysToAdd);
 
     await this.prisma.refreshToken.create({
       data: {
