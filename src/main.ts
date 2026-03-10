@@ -47,8 +47,16 @@ async function bootstrap() {
 
   // Body parser configuration for file uploads
   // Vercel has a 4.5MB limit for serverless functions
+  // Keep raw body for Stripe webhook signature verification
   const bodyParser = require('body-parser');
-  app.use(bodyParser.json({ limit: '4mb' }));
+  app.use(
+    bodyParser.json({
+      limit: '4mb',
+      verify: (req: any, _res: any, buf: Buffer) => {
+        req.rawBody = buf.toString('utf8');
+      },
+    }),
+  );
   app.use(bodyParser.urlencoded({ limit: '4mb', extended: true }));
 
   // CORS Configuration

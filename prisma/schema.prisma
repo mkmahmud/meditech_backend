@@ -77,6 +77,7 @@ enum PaymentStatus {
   FAILED
   REFUNDED
   PARTIALLY_PAID
+  CANCELLED
 }
 
 enum PaymentMethod {
@@ -85,6 +86,29 @@ enum PaymentMethod {
   INSURANCE
   ONLINE
   BANK_TRANSFER
+}
+
+enum PaymentProvider {
+  STRIPE
+  PAYPAL
+  CARD
+  BANK_TRANSFER
+}
+
+enum PaymentType {
+  APPOINTMENT_FEE
+  LAB_TEST_FEE
+  MEDICINE_FEE
+  CONSULTATION_FEE
+  PROCEDURE_FEE
+  OTHER
+}
+
+enum RefundStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REJECTED
 }
 
 enum NotificationType {
@@ -530,6 +554,8 @@ model Payment {
   currency        String        @default("USD")
   status          PaymentStatus @default(PENDING)
   method          PaymentMethod
+  provider        PaymentProvider
+  paymentType     PaymentType
   
   // References
   appointmentId   String?
@@ -538,13 +564,33 @@ model Payment {
   
   // Payment Gateway
   transactionId   String?       @unique
-  gatewayResponse String?       // JSON
+  gatewayResponse String?       // JSON - encrypted
+  
+  // Idempotency & Security
+  idempotencyKey  String        @unique
+  
+  // Card Details (Only for Card provider - encrypted)
+  cardLastFour    String?
+  cardBrand       String?
   
   // Invoice
   invoiceNumber   String        @unique
   invoiceUrl      String?       // S3 URL
   
+  // Refunds
+  refunds         Refund[]
+  totalRefunded   Float         @default(0)
+  
+  // Transactions
+  transactions    PaymentTransaction[] @relation("PaymentTransactions")
+  
+  // Additional Info
+  description     String?
+  metadata        String?       // JSON - additional metadata
+  
+  // Timestamps
   paidAt          DateTime?
+  failedAt        DateTime?
   
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
@@ -552,7 +598,61 @@ model Payment {
   @@index([patientId])
   @@index([status])
   @@index([invoiceNumber])
+  @@index([transactionId])
+  @@index([paymentType])
+  @@index([provider])
   @@map("payments")
+}
+
+model Refund {
+  id              String        @id @default(uuid())
+  paymentId       String
+  payment         Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  
+  amount          Float
+  reason          String
+  status          RefundStatus  @default(PENDING)
+  
+  // Gateway
+  refundId        String?       @unique
+  gatewayResponse String?       // JSON - encrypted
+  
+  // Idempotency
+  idempotencyKey  String        @unique
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  processedAt     DateTime?
+  
+  @@index([paymentId])
+  @@index([status])
+  @@map("refunds")
+}
+
+model PaymentTransaction {
+  id              String        @id @default(uuid())
+  paymentId       String
+  payment         Payment       @relation("PaymentTransactions", fields: [paymentId], references: [id], onDelete: Cascade)
+  
+  type            String        // CHARGE, DECLINE, REFUND, etc.
+  status          String        // SUCCESS, FAILED, PENDING
+  
+  // Details
+  amount          Float
+  fee             Float         @default(0)
+  details         String?       // JSON - encrypted
+  errorMessage    String?
+  
+  // Audit Trail
+  ipAddress       String?
+  userAgent       String?
+  
+  createdAt       DateTime      @default(now())
+  
+  @@index([paymentId])
+  @@index([type])
+  @@index([status])
+  @@map("payment_transactions")
 }
 
 // =============================================
