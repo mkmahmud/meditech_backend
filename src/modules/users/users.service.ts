@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef, ConflictException } from '@nestjs/common';
 // import { PrismaService } from '@/common/prisma/prisma.service';
 import { PrismaService } from '../../common/prisma/prisma.service';
+import { RedisService } from '../../common/redis/redis.service';
 import { UserRole } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(
+    private prisma: PrismaService,
+    private redisService: RedisService,
+  ) { }
 
   async findAll() {
     return this.prisma.user.findMany({
@@ -119,15 +123,59 @@ export class UsersService {
     // Clean user data
     const cleanedUserData = cleanData(userData);
 
-    // Check if username is provided and validate uniqueness
+    // If only username is being updated (no doctor/patient/email/password/other fields)
+    if (
+      Object.keys(cleanedUserData).length === 1 &&
+      Object.prototype.hasOwnProperty.call(cleanedUserData, 'username')
+    ) {
+      const usernameKey = `username:${cleanedUserData.username}`;
+      // Try Redis first
+      let existingUserId = await this.redisService.get<string>(usernameKey);
+      if (!existingUserId) {
+        // Not in cache, check DB
+        const existingUser = await this.prisma.user.findUnique({
+          where: { username: cleanedUserData.username },
+          select: { id: true },
+        });
+        if (existingUser) {
+          existingUserId = existingUser.id;
+          // Cache for future
+          await this.redisService.set(usernameKey, existingUserId, 60 * 5); // cache 5 min
+        }
+      }
+      if (existingUserId && existingUserId !== userId) {
+        throw new ConflictException('Username already exists. Please choose a different username.');
+      }
+      // Update username in DB
+      const updatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: { username: cleanedUserData.username },
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          phoneNumber: true,
+          role: true,
+          status: true,
+          profileImageUrl: true,
+          doctor: true,
+          patient: true,
+        },
+      });
+      // Invalidate old and new username cache
+      await this.redisService.delete(usernameKey);
+      return updatedUser;
+    }
+
+    // For all other updates, keep existing logic
+    // Check if username is provided and validate uniqueness (no Redis for bulk update)
     if (cleanedUserData.username) {
       const existingUser = await this.prisma.user.findUnique({
         where: { username: cleanedUserData.username }
       });
-
-      // If username exists and belongs to a different user, throw error
       if (existingUser && existingUser.id !== userId) {
-        throw new Error('Username already exists. Please choose a different username.');
+        throw new ConflictException('Username already exists. Please choose a different username.');
       }
     }
 

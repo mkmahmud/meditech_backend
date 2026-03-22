@@ -57,7 +57,7 @@ export class RedisService implements OnModuleDestroy {
   async set(key: string, value: any, ttl?: number): Promise<void> {
     try {
       const serialized = JSON.stringify(value);
-      
+
       if (ttl) {
         await this.client.setex(key, ttl, serialized);
       } else {

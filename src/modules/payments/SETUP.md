@@ -113,7 +113,7 @@ export class AppModule {}
    - Events to enable:
      - `checkout.session.completed`
      - `payment_intent.succeeded`
-     - `payment_intent.payment_failed`
+     - `payment_intent.payment_failed` 
      - `charge.refunded`
    - Copy webhook signing secret to `.env`
 
