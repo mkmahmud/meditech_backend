@@ -3,6 +3,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsController } from './notifications.controller';
 import { NotificationsService } from './notifications.service';
 import { PrismaModule } from '../../common/prisma/prisma.module';
+import { NotificationsGateway } from './notifications.gateway';
 
 @Module({
     imports: [
@@ -10,7 +11,7 @@ import { PrismaModule } from '../../common/prisma/prisma.module';
         ScheduleModule.forRoot(),
     ],
     controllers: [NotificationsController],
-    providers: [NotificationsService],
+    providers: [NotificationsService, NotificationsGateway],
     exports: [NotificationsService],
 })
 export class NotificationsModule { }

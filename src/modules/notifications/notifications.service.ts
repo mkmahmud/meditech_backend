@@ -15,12 +15,16 @@ import {
     SendBulkNotificationsDto,
 } from './schemas/notifications.schema';
 import { NotificationType } from '@prisma/client';
+import { NotificationsGateway } from './notifications.gateway';
 
 @Injectable()
 export class NotificationsService {
     private readonly logger = new Logger(NotificationsService.name);
 
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private notificationsGateway: NotificationsGateway
+    ) { }
 
     /**
      * Create a single notification
@@ -70,6 +74,8 @@ export class NotificationsService {
         });
 
         this.logger.log(`Notification created for user ${data.userId}`);
+        this.notificationsGateway.sendNotificationToUser(data.userId, notification);
+
         return notification;
     }
 
