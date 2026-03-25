@@ -2,7 +2,7 @@ import { Injectable, Inject, forwardRef, ConflictException } from '@nestjs/commo
 // import { PrismaService } from '@/common/prisma/prisma.service';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { RedisService } from '../../common/redis/redis.service';
-import { UserRole } from '@prisma/client';
+import { UserRole, UserStatus } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -11,18 +11,150 @@ export class UsersService {
     private redisService: RedisService,
   ) { }
 
-  async findAll() {
-    return this.prisma.user.findMany({
-      where: { deletedAt: null },
+  // Find All Users (with advanced filtering, sorting, field selection, soft delete awareness, and error handling)
+  async findAll({
+    search,
+    username,
+    email,
+    role,
+    status,
+    createdFrom,
+    createdTo,
+    includeDeleted = false,
+    fields,
+    sortBy = 'createdAt',
+    sortOrder = 'desc',
+    page = 1,
+    limit = 10,
+  }: {
+    search?: string;
+    username?: string;
+    email?: string;
+    role?: string;
+    status?: string;
+    createdFrom?: string;
+    createdTo?: string;
+    includeDeleted?: boolean;
+    fields?: string;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+    page?: number;
+    limit?: number;
+  }) {
+    // Validate sortOrder
+    if (sortOrder && !['asc', 'desc'].includes(sortOrder)) {
+      throw new Error('Invalid sortOrder. Use "asc" or "desc".');
+    }
+    // Validate page/limit
+    if (page < 1 || limit < 1) {
+      throw new Error('Page and limit must be positive integers.');
+    }
+    const skip = (page - 1) * limit;
+    // Build where clause
+    const where: any = {};
+    if (username) where.username = { contains: username, mode: 'insensitive' };
+    if (email) where.email = { contains: email, mode: 'insensitive' };
+    if (role) where.role = role;
+    if (status) where.status = status;
+    if (createdFrom || createdTo) {
+      where.createdAt = {};
+      if (createdFrom) where.createdAt.gte = new Date(createdFrom);
+      if (createdTo) where.createdAt.lte = new Date(createdTo);
+    }
+    if (search) {
+      where.OR = [
+        { username: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: 'insensitive' } },
+        { firstName: { contains: search, mode: 'insensitive' } },
+        { lastName: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
+    // Field selection
+    let select: any = {
+      id: true,
+      email: true,
+      username: true,
+      role: true,
+      status: true,
+      firstName: true,
+      lastName: true,
+      phoneNumber: true,
+      dateOfBirth: true,
+      gender: true,
+      profileImageUrl: true,
+      emailVerified: true,
+      phoneVerified: true,
+      twoFactorEnabled: true,
+      twoFactorSecret: true,
+      lastLogin: true,
+      failedLoginAttempts: true,
+      accountLockedUntil: true,
+      createdAt: true,
+      updatedAt: true,
+      deletedAt: true,
+
+      patient: true,
+      doctor: true,
+      refreshTokens: true,
+      auditLogs: true,
+      notifications: true,
+    };
+    if (fields) {
+      select = {};
+      fields.split(',').forEach(f => {
+        select[f.trim()] = true;
+      });
+      // Always include id
+      select.id = true;
+    }
+
+    // Sorting
+    const orderBy: any = {};
+    orderBy[sortBy] = sortOrder;
+
+    const total = await this.prisma.user.count({ where });
+    const data = await this.prisma.user.findMany({
+      where,
+      select,
+      skip,
+      take: limit,
+      orderBy,
+    });
+    return {
+      data,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+        hasNextPage: page < Math.ceil(total / limit),
+        hasPreviousPage: page > 1,
+      },
+    };
+  }
+
+  // Update User Status (Admin only)
+  async updateStatus(id: string, status: UserStatus) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { status },
       select: {
         id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        role: true,
         status: true,
-        createdAt: true,
-      },
+      }
+    })
+  }
+
+  // Delete User (Soft Delete)
+  async softDelete(id: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { deletedAt: new Date(), status: UserStatus.INACTIVE },
+      select: {
+        id: true,
+        deletedAt: true,
+      }
     });
   }
 

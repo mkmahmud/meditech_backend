@@ -95,6 +95,10 @@ async function bootstrap() {
     }),
   );
 
+  // Global response interceptor
+  const { ResponseInterceptor } = await import('./common/interceptors/response.interceptor');
+  app.useGlobalInterceptors(new ResponseInterceptor());
+
   // Swagger Documentation
   if (configService.get('NODE_ENV') !== 'production') {
     const config = new DocumentBuilder()
