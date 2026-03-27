@@ -23,6 +23,7 @@ import { EncryptionModule } from './common/encryption/encryption.module';
 import { S3Module } from './common/s3/s3.module';
 import { RedisModule } from './common/redis/redis.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { VitalsignsModule } from './modules/vitalsigns/vitalsigns.module';
 
 @Module({
   imports: [
@@ -108,6 +109,7 @@ import { AuthModule } from './modules/auth/auth.module';
     InsuranceModule,
     PaymentsModule,
     NotificationsModule,
+    VitalsignsModule,
     // AuditModule,
   ],
   controllers: [],

@@ -58,7 +58,7 @@ export const addMedicationSchema = z.object({
 
 export type AddMedicationDto = z.infer<typeof addMedicationSchema>;
 
-// Update Medication Schema
+// Update Medication Schema 
 export const updateMedicationSchema = z.object({
     medicationId: z.string().uuid('Invalid medication ID'),
     medicationName: z.string().min(2, 'Medication name must be at least 2 characters').max(200, 'Medication name is too long').optional(),

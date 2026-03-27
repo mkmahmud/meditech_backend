@@ -1,0 +1,47 @@
+# Artillery Load Test for Prescriptions Module
+
+config:
+  target: "http://localhost:5000/api/v1/v1"
+  phases:
+    - duration: 60
+      arrivalRate: 100  # 100 users per second
+  payload:
+    # Provide a CSV file with doctorId,patientId,authToken if you want dynamic data
+    # path: "users.csv"
+    # fields:
+    #   - doctorId
+    #   - patientId
+    #   - authToken
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNDhjOGMxNC00OGY2LTQ2YTEtYjE4Zi0zYjRhYWVhOTRkZDYiLCJlbWFpbCI6ImRvY3RvcjJAbWVkaXRlY2guY29tIiwicm9sZSI6IkRPQ1RPUiIsImlhdCI6MTc3NDU4MDUyNCwiZXhwIjoxNzc1MTg1MzI0fQ.-CU2Badjg_Ko8s6t44e0JXHJM-D6pFqo1O1LhuUht08"  # Replace with a valid JWT
+
+scenarios:
+  - name: "Create and Get Prescription"
+    flow:
+      - post:
+          url: "/prescriptions"
+          json:
+            patientId: "a836a934-2e4c-4035-8e35-54b838516722"
+            doctorId: "75e4fbee-75d7-473a-8d3c-a17ea9461ce1"
+            medications:
+              - medicationName: "Amoxicillin"
+                dosage: "500mg"
+                frequency: "Three times daily"
+                duration: "7 days"
+                instructions: "Take with food to avoid stomach upset"
+                refillsAllowed: 1
+            expiresAt: "2026-06-09T23:59:59.000Z"
+            notes: "Monitor for allergic reactions. Follow up in 1 week if symptoms persist."
+          capture:
+            - json: "id"
+              as: "prescriptionId"
+          expect:
+            - statusCode: 201
+      - get:
+          url: "/prescriptions/{{ prescriptionId }}"
+          expect:
+            - statusCode: 200
+      - think: 1
+
