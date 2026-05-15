@@ -15,7 +15,7 @@ import {
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { VitalsignsService } from './vitalsigns.service';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '@/common/decorators/auth.decorator';
+import { Roles } from '../../common/decorators/auth.decorator';
 
 @ApiTags('Vitalsigns')
 @ApiBearerAuth('JWT-auth')

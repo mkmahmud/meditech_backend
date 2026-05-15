@@ -81,13 +81,16 @@ export class doctorsService {
 
     // Get Doctor Info
     async getDoctorProfile(doctorId: string) {
-        const doctor = await this.prisma.user.findUnique({
+        const data = await this.prisma.user.findUnique({
             where: { id: doctorId },
             select: {
                 firstName: true,
                 lastName: true,
                 gender: true,
                 profileImageUrl: true,
+                email: true,
+                phoneNumber: true,
+                emailVerified: true,
                 doctor: {
                     select: {
                         id: true,
@@ -95,11 +98,17 @@ export class doctorsService {
                         experience: true,
                         licenseNumber: true,
                         consultationFee: true,
+                        qualifications: true,
                     }
                 }
             }
         });
 
-        return doctor;
+        const doctorAvailability = await this.getDoctorsAvailability(doctorId);
+
+
+
+
+        return { data, doctorAvailability };
     }
 }

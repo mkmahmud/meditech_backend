@@ -1,157 +1,335 @@
 import {
-    PrismaClient, UserRole, UserStatus, Gender, Specialization,
-    AppointmentStatus, AppointmentType, PaymentStatus, PaymentMethod,
-    PaymentProvider, PaymentType, InsuranceStatus
+    PrismaClient,
+    UserRole,
+    UserStatus,
+    Specialization,
+    AppointmentType,
+    AppointmentStatus,
+    PaymentStatus,
+    PaymentMethod,
+    PaymentProvider,
+    PaymentType,
+    NotificationType,
+    AuditAction,
+    RefundStatus
 } from '@prisma/client';
+
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
+    console.log("🌱 Seeding...");
+
     const password = await bcrypt.hash('Password123!', 10);
 
-    // 1. Seed Users (Doctors & Patients)
-    const { doctorIds, patientIds, patientUserIds } = await seedUsers(password);
+    const { doctorIds, patientIds, userIds } = await seedUsers(password);
 
-    // 2. Seed Medical Basics (History, Vitals, Allergies)
-    await seedMedicalBasics(patientIds);
+    await seedDoctorAvailability(doctorIds);
+    await seedFamilyMembers(patientIds);
 
-    // 3. Seed Appointments & Prescriptions (300 Completed, 200 Others)
+    await seedMedical(patientIds);
+    await seedVitals(patientIds);
+
     const appointmentIds = await seedAppointments(doctorIds, patientIds);
+    const prescriptionIds = await seedPrescriptions(doctorIds, patientIds);
 
-    // 4. Seed Lab Results
-    await seedLabResults(patientIds);
+    await seedMedications(prescriptionIds);
+    await seedLab(patientIds);
 
-    // 5. Seed Insurance & Payments
+    const paymentIds = await seedPayments(patientIds, appointmentIds);
+    await seedRefunds(paymentIds);
+    await seedTransactions(paymentIds);
 
-    // 6. Seed Notifications
-    await seedNotifications(patientUserIds);
+    await seedNotifications(userIds);
+    await seedAudit(userIds);
 
-    console.log('✅ Full System Seed Completed!');
+    await seedConfig();
+
+    console.log("✅ Done");
 }
 
 async function seedUsers(password: string) {
     const doctorIds: string[] = [];
     const patientIds: string[] = [];
-    const patientUserIds: string[] = [];
+    const userIds: string[] = [];
 
-    for (let i = 0; i < 50; i++) {
-        const email = `doctor${i}@hospital.com`;
-        const doc = await prisma.user.upsert({
-            where: { email },
+    for (let i = 0; i < 20; i++) {
+        const user = await prisma.user.upsert({
+            where: { email: `doctor${i}@mail.com` },
             update: {},
             create: {
-                email, password, role: UserRole.DOCTOR, status: UserStatus.ACTIVE,
-                firstName: faker.person.firstName('male'), lastName: faker.person.lastName(),
-                doctor: {
-                    create: {
-                        licenseNumber: `LIC-${faker.string.alphanumeric(7).toUpperCase()}`,
-                        specialization: faker.helpers.arrayElement(Object.values(Specialization)),
-                        experience: faker.number.int({ min: 5, max: 25 }),
-                        consultationFee: 150.00
-                    }
-                }
-            },
-            include: { doctor: true }
+                email: `doctor${i}@mail.com`,
+                password,
+                role: UserRole.DOCTOR,
+                status: UserStatus.ACTIVE,
+                firstName: faker.person.firstName(),
+                lastName: faker.person.lastName()
+            }
         });
-        if (doc.doctor) doctorIds.push(doc.doctor.id);
-    }
 
-    for (let i = 0; i < 100; i++) {
-        const email = `patient${i}@test.com`;
-        const pat = await prisma.user.upsert({
-            where: { email },
+        userIds.push(user.id);
+
+        const doctor = await prisma.doctor.upsert({
+            where: { userId: user.id },
             update: {},
             create: {
-                email, password, role: UserRole.PATIENT, status: UserStatus.ACTIVE,
-                firstName: faker.person.firstName(), lastName: faker.person.lastName(),
-                patient: { create: { bloodType: 'B+', height: 170, weight: 70 } }
-            },
-            include: { patient: true }
+                userId: user.id,
+                licenseNumber: faker.string.uuid(),
+                specialization: faker.helpers.arrayElement(Object.values(Specialization)),
+                qualifications: ["MBBS"],
+                experience: 5,
+                consultationFee: 100
+            }
         });
-        if (pat.patient) {
-            patientIds.push(pat.patient.id);
-            patientUserIds.push(pat.id);
-        }
+
+        doctorIds.push(doctor.id);
     }
-    return { doctorIds, patientIds, patientUserIds };
+
+    for (let i = 0; i < 20; i++) {
+        const user = await prisma.user.upsert({
+            where: { email: `patient${i}@mail.com` },
+            update: {},
+            create: {
+                email: `patient${i}@mail.com`,
+                password,
+                role: UserRole.PATIENT,
+                status: UserStatus.ACTIVE,
+                firstName: faker.person.firstName(),
+                lastName: faker.person.lastName()
+            }
+        });
+
+        userIds.push(user.id);
+
+        const patient = await prisma.patient.upsert({
+            where: { userId: user.id },
+            update: {},
+            create: { userId: user.id }
+        });
+
+        patientIds.push(patient.id);
+    }
+
+    return { doctorIds, patientIds, userIds };
 }
 
-async function seedMedicalBasics(patientIds: string[]) {
-    for (const id of patientIds) {
-        await prisma.medicalHistory.create({
-            data: {
-                patientId: id,
-                condition: faker.helpers.arrayElement(['Hypertension', 'Type 2 Diabetes', 'Asthma']),
-                diagnosedAt: faker.date.past(),
-                isActive: true
-            }
-        });
-        await prisma.vitalSign.create({
-            data: {
-                patientId: id,
-                bloodPressureSystolic: 120,
-                bloodPressureDiastolic: 80,
-                heartRate: 72,
-                weight: 70,
-                recordedAt: new Date()
+async function seedDoctorAvailability(doctorIds: string[]) {
+    await prisma.doctorAvailability.createMany({
+        data: doctorIds.flatMap(id =>
+            Array.from({ length: 7 }).map((_, d) => ({
+                doctorId: id,
+                dayOfWeek: d,
+                startTime: "09:00",
+                endTime: "17:00"
+            }))
+        ),
+        skipDuplicates: true
+    });
+}
+
+async function seedFamilyMembers(patientIds: string[]) {
+    const used = new Set<string>();
+
+    for (let i = 0; i < 20; i++) {
+        let head = faker.helpers.arrayElement(patientIds);
+        let member = faker.helpers.arrayElement(patientIds);
+
+        while (member === head || used.has(member)) {
+            member = faker.helpers.arrayElement(patientIds);
+        }
+
+        used.add(member);
+
+        await prisma.familyMember.upsert({
+            where: { memberPatientId: member },
+            update: {},
+            create: {
+                headPatientId: head,
+                memberPatientId: member,
+                relationship: "SIBLING"
             }
         });
     }
+}
+
+async function seedMedical(patientIds: string[]) {
+    await prisma.medicalHistory.createMany({
+        data: patientIds.map(id => ({
+            patientId: id,
+            condition: "Diabetes",
+            diagnosedAt: faker.date.past()
+        })),
+        skipDuplicates: true
+    });
+
+    await prisma.allergy.createMany({
+        data: patientIds.map(id => ({
+            patientId: id,
+            allergen: "Dust",
+            severity: "MILD"
+        })),
+        skipDuplicates: true
+    });
+}
+
+async function seedVitals(patientIds: string[]) {
+    await prisma.vitalSign.createMany({
+        data: patientIds.map(id => ({
+            patientId: id,
+            heartRate: 70,
+            temperature: 37
+        })),
+        skipDuplicates: true
+    });
 }
 
 async function seedAppointments(doctorIds: string[], patientIds: string[]) {
-    const appointmentIds: string[] = [];
-    for (let i = 0; i < 500; i++) {
-        const status = i < 300 ? AppointmentStatus.COMPLETED : AppointmentStatus.SCHEDULED;
-        const appt = await prisma.appointment.create({
+    const ids: string[] = [];
+
+    for (let i = 0; i < 20; i++) {
+        const a = await prisma.appointment.create({
             data: {
-                patientId: faker.helpers.arrayElement(patientIds),
                 doctorId: faker.helpers.arrayElement(doctorIds),
+                patientId: faker.helpers.arrayElement(patientIds),
                 scheduledAt: faker.date.recent(),
-                status,
                 type: AppointmentType.IN_PERSON,
+                status: AppointmentStatus.COMPLETED
             }
         });
-        appointmentIds.push(appt.id);
-
-        if (status === AppointmentStatus.COMPLETED) {
-            await prisma.prescription.create({
-                data: {
-                    patientId: appt.patientId,
-                    doctorId: appt.doctorId,
-                    medications: { create: [{ medicationName: 'Amoxicillin', dosage: '500mg', frequency: '1x daily', duration: '7 days' }] }
-                }
-            });
-        }
+        ids.push(a.id);
     }
-    return appointmentIds;
+
+    return ids;
 }
 
-async function seedLabResults(patientIds: string[]) {
-    for (let i = 0; i < 50; i++) {
-        await prisma.labResult.create({
+async function seedPrescriptions(doctorIds: string[], patientIds: string[]) {
+    const ids: string[] = [];
+
+    for (let i = 0; i < 20; i++) {
+        const p = await prisma.prescription.create({
             data: {
-                patientId: faker.helpers.arrayElement(patientIds),
-                testName: 'Complete Blood Count',
-                testType: 'Blood Test',
-                orderedAt: faker.date.past(),
-                isAbnormal: faker.datatype.boolean()
+                doctorId: faker.helpers.arrayElement(doctorIds),
+                patientId: faker.helpers.arrayElement(patientIds)
             }
         });
+        ids.push(p.id);
     }
+
+    return ids;
+}
+
+async function seedMedications(ids: string[]) {
+    await prisma.prescriptionMedication.createMany({
+        data: ids.map(id => ({
+            prescriptionId: id,
+            medicationName: "Paracetamol",
+            dosage: "500mg",
+            frequency: "Twice daily",
+            duration: "5 days"
+        })),
+        skipDuplicates: true
+    });
+}
+
+async function seedLab(patientIds: string[]) {
+    await prisma.labResult.createMany({
+        data: patientIds.map(id => ({
+            patientId: id,
+            testName: "CBC",
+            testType: "Blood",
+            orderedAt: faker.date.past()
+        })),
+        skipDuplicates: true
+    });
+}
+
+async function seedPayments(patientIds: string[], appointmentIds: string[]) {
+    const ids: string[] = [];
+
+    for (let i = 0; i < 20; i++) {
+        const pay = await prisma.payment.create({
+            data: {
+                patientId: faker.helpers.arrayElement(patientIds),
+                amount: 100,
+                status: PaymentStatus.COMPLETED,
+                method: PaymentMethod.CARD,
+                provider: PaymentProvider.STRIPE,
+                paymentType: PaymentType.APPOINTMENT_FEE,
+                idempotencyKey: faker.string.uuid(),
+                invoiceNumber: faker.string.uuid(),
+                appointmentId: faker.helpers.arrayElement(appointmentIds)
+            }
+        });
+
+        ids.push(pay.id);
+    }
+
+    return ids;
+}
+
+async function seedRefunds(paymentIds: string[]) {
+    await prisma.refund.createMany({
+        data: paymentIds.map(id => ({
+            paymentId: id,
+            amount: 10,
+            reason: "Test refund",
+            status: RefundStatus.COMPLETED,
+            idempotencyKey: faker.string.uuid()
+        })),
+        skipDuplicates: true
+    });
+}
+
+async function seedTransactions(paymentIds: string[]) {
+    await prisma.paymentTransaction.createMany({
+        data: paymentIds.map(id => ({
+            paymentId: id,
+            type: "CHARGE",
+            status: "SUCCESS",
+            amount: 100
+        })),
+        skipDuplicates: true
+    });
 }
 
 async function seedNotifications(userIds: string[]) {
     await prisma.notification.createMany({
-        data: userIds.map(uid => ({
-            userId: uid,
-            type: 'GENERAL',
-            title: 'Monthly Checkup',
-            message: 'Don\'t forget to book your monthly checkup for April.',
-        }))
+        data: userIds.map(id => ({
+            userId: id,
+            type: NotificationType.GENERAL,
+            title: "Hello",
+            message: "Test notification"
+        })),
+        skipDuplicates: true
     });
 }
 
-main().catch(e => { console.error(e); process.exit(1); }).finally(() => prisma.$disconnect());
+async function seedAudit(userIds: string[]) {
+    await prisma.auditLog.createMany({
+        data: userIds.map(id => ({
+            userId: id,
+            action: AuditAction.LOGIN,
+            resource: "User",
+            ipAddress: faker.internet.ip(),
+            endpoint: "/login",
+            method: "POST"
+        })),
+        skipDuplicates: true
+    });
+}
+
+async function seedConfig() {
+    await prisma.systemConfig.createMany({
+        data: [
+            { key: "APP_NAME", value: "Meditech" },
+            { key: "VERSION", value: "1.0.0" }
+        ],
+        skipDuplicates: true
+    });
+}
+
+main()
+    .catch(console.error)
+    .finally(() => prisma.$disconnect());
