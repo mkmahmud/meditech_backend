@@ -38,6 +38,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/auth.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
+import { ApiZodBody } from '../../common/swagger/api-zod-body.decorator';
 
 @ApiTags('Notifications')
 @ApiBearerAuth('JWT-auth')
@@ -59,6 +60,7 @@ export class NotificationsController {
     @ApiResponse({ status: 201, description: 'Notification created successfully' })
     @ApiResponse({ status: 404, description: 'User not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(createNotificationSchema)
     @UsePipes(new ZodValidationPipe(createNotificationSchema))
     async createNotification(
         @Body() createNotificationDto: CreateNotificationDto,
@@ -82,6 +84,7 @@ export class NotificationsController {
     })
     @ApiResponse({ status: 400, description: 'Invalid request data' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(sendBulkNotificationsSchema)
     @UsePipes(new ZodValidationPipe(sendBulkNotificationsSchema))
     async sendBulkNotifications(
         @Body() sendBulkNotificationsDto: SendBulkNotificationsDto,
@@ -180,6 +183,7 @@ export class NotificationsController {
         description: 'Notifications marked as read successfully',
     })
     @ApiResponse({ status: 404, description: 'Notifications not found' })
+    @ApiZodBody(markAsReadSchema)
     @UsePipes(new ZodValidationPipe(markAsReadSchema))
     async markAsRead(@Body() markAsReadDto: MarkAsReadDto) {
         return this.notificationsService.markAsRead(markAsReadDto);
@@ -214,6 +218,7 @@ export class NotificationsController {
     @ApiResponse({ status: 200, description: 'Notification updated successfully' })
     @ApiResponse({ status: 404, description: 'Notification not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(updateNotificationSchema)
     @UsePipes(new ZodValidationPipe(updateNotificationSchema))
     async updateNotification(
         @Param('id') id: string,
@@ -241,6 +246,7 @@ export class NotificationsController {
     })
     @ApiResponse({ status: 404, description: 'Notifications not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(deleteNotificationSchema)
     @UsePipes(new ZodValidationPipe(deleteNotificationSchema))
     async deleteNotifications(
         @Body() deleteNotificationDto: DeleteNotificationDto,

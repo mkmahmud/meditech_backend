@@ -25,6 +25,7 @@ import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { Roles } from 'src/common/decorators/auth.decorator';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { PAYMENT_CONFIG, PaymentProvider } from './constants/payment.constants';
+import { ApiZodBody } from 'src/common/swagger/api-zod-body.decorator';
 
 /**
  * Payments Controller
@@ -50,6 +51,7 @@ export class PaymentsController {
     @Post('create')
     @HttpCode(HttpStatus.CREATED)
     @Throttle({ default: { limit: PAYMENT_CONFIG.MAX_PAYMENTS_PER_MINUTE, ttl: PAYMENT_CONFIG.RATE_LIMIT_WINDOW_MS } })
+    @ApiZodBody(CreatePaymentRequestSchema)
     @UsePipes(new ZodValidationPipe(CreatePaymentRequestSchema))
     @Roles('PATIENT')
     @ApiOperation({
@@ -199,6 +201,7 @@ export class PaymentsController {
     @Post(':paymentId/refund')
     @HttpCode(HttpStatus.OK)
     @Throttle({ default: { limit: 5, ttl: PAYMENT_CONFIG.RATE_LIMIT_WINDOW_MS } })
+    @ApiZodBody(RefundRequestSchema)
     @UsePipes(new ZodValidationPipe(RefundRequestSchema))
     @Roles('PATIENT')
     @ApiOperation({

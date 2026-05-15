@@ -16,6 +16,7 @@ import { LabResultsModule } from './modules/lab-results/lab-results.module';
 import { InsuranceModule } from './modules/insurance/insurance.module';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
+import { OverviewModule } from './modules/overview/overview.module';
 // import { AuditModule } from './modules/audit/audit.module';
 
 // Common Modules
@@ -109,6 +110,7 @@ import { VitalsignsModule } from './modules/vitalsigns/vitalsigns.module';
     InsuranceModule,
     PaymentsModule,
     NotificationsModule,
+    OverviewModule,
     VitalsignsModule,
     // AuditModule,
   ],

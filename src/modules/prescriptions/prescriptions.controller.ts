@@ -40,6 +40,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../../common/decorators/auth.decorator';
 import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
+import { ApiZodBody } from '../../common/swagger/api-zod-body.decorator';
 
 @ApiTags('Prescriptions')
 @ApiBearerAuth('JWT-auth')
@@ -60,6 +61,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 201, description: 'Prescription created successfully' })
     @ApiResponse({ status: 404, description: 'Doctor or patient not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(createPrescriptionSchema)
     @UsePipes(new ZodValidationPipe(createPrescriptionSchema))
     async createPrescription(
         @Body() createPrescriptionDto: CreatePrescriptionDto,
@@ -111,6 +113,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 200, description: 'Prescription updated successfully' })
     @ApiResponse({ status: 404, description: 'Prescription not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(updatePrescriptionSchema)
     @UsePipes(new ZodValidationPipe(updatePrescriptionSchema))
     async updatePrescription(
         @Param('id') id: string,
@@ -148,6 +151,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 404, description: 'Prescription not found' })
     @ApiResponse({ status: 400, description: 'Cannot add to inactive prescription' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(addMedicationSchema)
     @UsePipes(new ZodValidationPipe(addMedicationSchema))
     async addMedication(@Body() addMedicationDto: AddMedicationDto) {
         return this.prescriptionsService.addMedication(addMedicationDto);
@@ -165,6 +169,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 200, description: 'Medication updated successfully' })
     @ApiResponse({ status: 404, description: 'Medication not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(updateMedicationSchema)
     @UsePipes(new ZodValidationPipe(updateMedicationSchema))
     async updateMedication(
         @Param('medicationId') medicationId: string,
@@ -222,6 +227,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 404, description: 'Prescription not found' })
     @ApiResponse({ status: 403, description: 'Only prescribing doctor can sign' })
     @ApiResponse({ status: 400, description: 'Already signed' })
+    @ApiZodBody(signPrescriptionSchema)
     @UsePipes(new ZodValidationPipe(signPrescriptionSchema))
     async signPrescription(@Body() signPrescriptionDto: SignPrescriptionDto) {
         return this.prescriptionsService.signPrescription(signPrescriptionDto);
@@ -245,6 +251,7 @@ export class PrescriptionsController {
     @ApiResponse({ status: 404, description: 'Prescription not found' })
     @ApiResponse({ status: 400, description: 'Must be signed first or already sent' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(sendToPharmacySchema)
     @UsePipes(new ZodValidationPipe(sendToPharmacySchema))
     async sendToPharmacy(@Body() sendToPharmacyDto: SendToPharmacyDto) {
         return this.prescriptionsService.sendToPharmacy(sendToPharmacyDto);

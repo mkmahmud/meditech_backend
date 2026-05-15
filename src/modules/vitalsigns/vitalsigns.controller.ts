@@ -10,6 +10,7 @@ import {
     ApiTags,
     ApiBearerAuth,
     ApiOperation,
+    ApiBody,
     ApiResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -35,7 +36,23 @@ export class VitalsignsController {
     @ApiResponse({ status: 201, description: 'Vital sign created successfully' })
     @ApiResponse({ status: 404, description: 'Doctor or patient not found' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
-    @Post()
+    @ApiBody({
+        schema: {
+            type: 'object',
+            required: ['patientId'],
+            properties: {
+                patientId: { type: 'string', format: 'uuid' },
+                bloodPressureSystolic: { type: 'number' },
+                bloodPressureDiastolic: { type: 'number' },
+                heartRate: { type: 'number' },
+                temperature: { type: 'number' },
+                oxygenSaturation: { type: 'number' },
+                bloodGlucose: { type: 'number' },
+                weight: { type: 'number' },
+                notes: { type: 'string' },
+            },
+        },
+    })
     async createVitalSign(@Body() vitalSignData: any) {
         const { patientId } = vitalSignData;
         return this.vitalsignsService.createVitalSign(patientId, vitalSignData);

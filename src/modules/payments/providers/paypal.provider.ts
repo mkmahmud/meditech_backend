@@ -293,6 +293,8 @@ export class PayPalPaymentProvider {
                     return {
                         type: 'payment_completed',
                         transactionId: event.resource.id,
+                        orderId: event.resource.supplementary_data?.related_ids?.order_id,
+                        paymentId: event.resource.custom_id || event.resource.purchase_units?.[0]?.custom_id,
                         amount: event.resource.amount.value,
                         currency: event.resource.amount.currency_code,
                     };

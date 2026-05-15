@@ -28,6 +28,7 @@ import { StripePaymentProvider } from './providers/stripe.provider';
 import { PayPalPaymentProvider } from './providers/paypal.provider';
 import { CardPaymentProvider } from './providers/card.provider';
 import { v4 as uuidv4 } from 'uuid';
+import { AppointmentStatus } from '@prisma/client';
 
 /**
  * Main Payment Service
@@ -123,6 +124,8 @@ export class PaymentsService {
                 payment,
                 payload,
             );
+
+            await this.applySuccessfulPaymentEffects(processedPayment);
 
             // Log audit trail
             await this.logAuditTrail({
@@ -276,6 +279,26 @@ export class PaymentsService {
             });
 
             throw error;
+        }
+    }
+
+    private async applySuccessfulPaymentEffects(payment: any): Promise<void> {
+        if (!payment || payment.status !== PaymentStatus.COMPLETED) {
+            return;
+        }
+
+        if (payment.paymentType === PaymentType.APPOINTMENT_FEE && payment.appointmentId) {
+            await this.prisma.appointment.updateMany({
+                where: {
+                    id: payment.appointmentId,
+                    patientId: payment.patientId,
+                    status: AppointmentStatus.SCHEDULED,
+                },
+                data: {
+                    status: AppointmentStatus.CONFIRMED,
+                    updatedAt: new Date(),
+                },
+            });
         }
     }
 

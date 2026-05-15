@@ -4,7 +4,8 @@ import { PrismaService } from 'src/common/prisma/prisma.service';
 import { EncryptionService } from 'src/common/encryption/encryption.service';
 import { StripePaymentProvider } from './providers/stripe.provider';
 import { PayPalPaymentProvider } from './providers/paypal.provider';
-import { PaymentStatus, RefundStatus } from './constants/payment.constants';
+import { PaymentStatus, RefundStatus, PaymentType, TransactionType } from './constants/payment.constants';
+import { AppointmentStatus } from '@prisma/client';
 
 /**
  * Payment Webhook Handler Service
@@ -163,13 +164,10 @@ export class PaymentWebhookService {
 
             this.logger.log(`Found payment record: ${payment.id}, current status: ${payment.status}`);
 
-            // Update payment status
-            const updated = await (this.prisma.payment as any).update({
-                where: { id: payment.id },
-                data: {
-                    status: PaymentStatus.COMPLETED,
-                    paidAt: new Date(),
-                },
+            const updated = await this.markPaymentCompleted(payment, {
+                amount: event.amount,
+                transactionId,
+                details: event,
             });
 
             this.logger.log(`✓ Payment marked as completed: ${payment.id}, new status: ${updated.status}`);
@@ -287,22 +285,36 @@ export class PaymentWebhookService {
      */
     private async handlePayPalPaymentCompleted(event: any): Promise<void> {
         try {
-            const { transactionId, amount, currency } = event;
+            const { transactionId, amount, currency, paymentId, orderId } = event;
 
-            const payment = await this.prisma.payment.findUnique({
+            let payment = await this.prisma.payment.findUnique({
                 where: { transactionId },
             });
 
+            if (!payment && orderId) {
+                payment = await this.prisma.payment.findUnique({
+                    where: { transactionId: orderId },
+                });
+            }
+
+            if (!payment && paymentId) {
+                payment = await this.prisma.payment.findUnique({
+                    where: { id: paymentId },
+                });
+            }
+
             if (!payment) {
-                this.logger.warn(`Payment not found for transaction: ${transactionId}`);
+                this.logger.warn(`Payment not found for PayPal transaction: ${transactionId}`);
+                this.logger.warn(`PayPal orderId: ${orderId || 'N/A'}, paymentId: ${paymentId || 'N/A'}`);
                 return;
             }
 
-            await this.prisma.payment.update({
-                where: { id: payment.id },
-                data: {
-                    status: PaymentStatus.COMPLETED,
-                    paidAt: new Date(),
+            await this.markPaymentCompleted(payment, {
+                amount: Number(amount) || payment.amount,
+                transactionId: transactionId || payment.transactionId,
+                details: {
+                    ...event,
+                    currency,
                 },
             });
 
@@ -380,5 +392,62 @@ export class PaymentWebhookService {
             );
             throw error;
         }
+    }
+
+    private async markPaymentCompleted(payment: any, event: { amount?: number; transactionId?: string; details?: any }) {
+        const updated = await (this.prisma.payment as any).update({
+            where: { id: payment.id },
+            data: {
+                status: PaymentStatus.COMPLETED,
+                paidAt: payment.paidAt || new Date(),
+                transactionId: event.transactionId || payment.transactionId,
+            },
+        });
+
+        const existingTransaction = await this.prisma.paymentTransaction.findFirst({
+            where: {
+                paymentId: payment.id,
+                type: TransactionType.CHARGE,
+            },
+            orderBy: { createdAt: 'asc' },
+        });
+
+        if (existingTransaction) {
+            await this.prisma.paymentTransaction.update({
+                where: { id: existingTransaction.id },
+                data: {
+                    status: 'SUCCESS',
+                    amount: Number(event.amount) || payment.amount,
+                    details: this.encryption.encrypt(JSON.stringify(event.details || {})),
+                    errorMessage: null,
+                },
+            });
+        } else {
+            await this.prisma.paymentTransaction.create({
+                data: {
+                    paymentId: payment.id,
+                    type: TransactionType.CHARGE,
+                    status: 'SUCCESS',
+                    amount: Number(event.amount) || payment.amount,
+                    details: this.encryption.encrypt(JSON.stringify(event.details || {})),
+                },
+            });
+        }
+
+        if (payment.paymentType === PaymentType.APPOINTMENT_FEE && payment.appointmentId) {
+            await this.prisma.appointment.updateMany({
+                where: {
+                    id: payment.appointmentId,
+                    patientId: payment.patientId,
+                    status: AppointmentStatus.SCHEDULED,
+                },
+                data: {
+                    status: AppointmentStatus.CONFIRMED,
+                    updatedAt: new Date(),
+                },
+            });
+        }
+
+        return updated;
     }
 }

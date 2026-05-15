@@ -5,6 +5,7 @@ import { AppointmentsService } from "./appointments.service";
 import { RolesGuard } from "../auth/guards/roles.guard";
 import { Roles } from "../../common/decorators/auth.decorator";
 import { ZodValidationPipe } from "../../common/pipes/zod-validation.pipe";
+import { ApiZodBody } from "../../common/swagger/api-zod-body.decorator";
 import {
     CreateAppointmentDTO,
     createAppointmentSchema,
@@ -42,6 +43,7 @@ export class AppointmentsController {
     @ApiResponse({ status: 201, description: 'Appointment created successfully' })
     @ApiResponse({ status: 409, description: 'Appointment already exists' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(createAppointmentSchema)
     async createAppointment(
         @Body(new ZodValidationPipe(createAppointmentSchema)) createAppointmentDto: CreateAppointmentDTO,
     ) {
@@ -57,6 +59,7 @@ export class AppointmentsController {
     @ApiOperation({ summary: 'Confirm an appointment (Patient only)' })
     @ApiResponse({ status: 200, description: 'Appointment confirmed successfully' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(confirmAppointmentBypatient)
     async confirmAppointment(
         @Body(new ZodValidationPipe(confirmAppointmentBypatient)) confirmAppointmentDto: ConfirmAppointemntDto,
     ) {
@@ -101,6 +104,7 @@ export class AppointmentsController {
     @ApiOperation({ summary: 'Cancel an appointment (Doctor and Patient)' })
     @ApiResponse({ status: 200, description: 'Appointment cancelled successfully' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(cancelAppointmentSchema)
     async cancelAppointment(
         @Body(new ZodValidationPipe(cancelAppointmentSchema)) cancelAppointmentDto: CancelAppointmentDTO,
     ) {
@@ -132,6 +136,7 @@ export class AppointmentsController {
     @ApiOperation({ summary: 'Complete an appointment (Doctor only)' })
     @ApiResponse({ status: 200, description: 'Appointment marked as completed successfully' })
     @ApiResponse({ status: 403, description: 'Insufficient permissions' })
+    @ApiZodBody(completeAppointmentSchema)
     async completeAppointment(
         @Body(new ZodValidationPipe(completeAppointmentSchema)) completeAppointmentDto: CompleteAppointmentDTO,
     ) {
